@@ -1,11 +1,13 @@
 export default function Hero() {
+  const profileImg = `${import.meta.env.BASE_URL}profile.png`;
+
   return (
     <section className="w-full bg-deep-maroon text-blush-pink font-body overflow-hidden relative">
       {/* Desktop layout (≥1024px) */}
       <div className="hidden lg:block min-h-[680px] relative">
         {/* Circular profile image */}
         <img
-          src="/profile.png"
+          src={profileImg}
           alt="ann mathew"
           className="absolute w-[525px] h-[525px] top-[100px] left-[728px] object-cover rounded-full z-10 shadow-lg"
         />
@@ -33,7 +35,7 @@ export default function Hero() {
           welcome to my portfolio!
         </h1>
         <img
-          src="/profile.png"
+          src={profileImg}
           alt="ann mathew"
           className="w-[300px] h-[300px] object-cover rounded-full shadow-md mb-6"
         />
