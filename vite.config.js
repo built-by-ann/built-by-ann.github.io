@@ -3,6 +3,6 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  base: '/built-by-ann.github.io/', // ✅ required for GitHub Pages
+  base: '/built-by-ann.github.io/',
   plugins: [react()],
 });
