@@ -37,7 +37,7 @@ Every page is designed to reflect not only what I've done — but how I think, g
 
 Here's the original homepage design that this project is built from:
 
-[Figma Homepage Design](./figma/design.png/)
+![Figma Homepage Design](./figma/design.png/)
 
 ---
 
