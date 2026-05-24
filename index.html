@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta id="vp" name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
       (function () {
         // SPA 404 redirect handler
@@ -18,11 +18,13 @@
         // Scale the fixed 1440px layout to fit any screen
         var sw = screen.width;
         if (sw < 1440) {
-          // Mobile: tell the browser to render at 1440px and zoom to fit
-          document.getElementById('vp').content =
-            'width=1440, initial-scale=' + (sw / 1440).toFixed(5);
+          // Mobile: zoom #root (not html) so body height = content height, avoiding iOS empty-space bug
+          var scale = (sw / 1440).toFixed(5);
+          var s = document.createElement('style');
+          s.textContent = '#root{zoom:' + scale + ';width:1440px}';
+          document.head.appendChild(s);
         } else {
-          // Desktop: use CSS zoom so the layout fills narrower browser windows
+          // Desktop: CSS zoom on html so the layout fills narrower browser windows
           var applyZoom = function () {
             document.documentElement.style.zoom = (window.innerWidth / 1440).toString();
           };
