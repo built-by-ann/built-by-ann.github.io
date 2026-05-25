@@ -25,18 +25,36 @@ export default function ResumePage() {
         my resume!
       </h1>
 
-      <p
-        style={{
-          fontFamily: "'Roboto', sans-serif",
-          fontStyle: 'italic',
-          fontSize: 24,
-          color: '#f0c3e9',
-          lineHeight: 1.4,
-          marginBottom: 48,
-        }}
-      >
-        what i've been up to
-      </p>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 48 }}>
+        <p
+          style={{
+            fontFamily: "'Roboto', sans-serif",
+            fontStyle: 'italic',
+            fontSize: 24,
+            color: '#f0c3e9',
+            lineHeight: 1.4,
+            margin: 0,
+          }}
+        >
+          what i've been up to
+        </p>
+        <a
+          href={resumePdf}
+          download
+          style={{
+            fontFamily: "'Roboto', sans-serif",
+            fontWeight: 700,
+            fontSize: 18,
+            color: '#490013',
+            backgroundColor: '#f5d7cc',
+            padding: '14px 32px',
+            textDecoration: 'none',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          download pdf
+        </a>
+      </div>
 
       <div style={{ outline: '4px solid #be7880' }}>
         <iframe

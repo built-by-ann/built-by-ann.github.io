@@ -93,8 +93,8 @@ export default function StudyAbroadPage() {
           paddingRight: 188,
         }}
       >
-        <div style={sectionLabel('spring 2024 · cet siena')}>
-          spring 2024 · cet siena
+        <div style={sectionLabel('spring 2025 · cet siena')}>
+          spring 2025 · cet siena
         </div>
         <h1
           style={{
@@ -286,15 +286,15 @@ export default function StudyAbroadPage() {
             }}
           >
             as someone who grew up trilingual and multicultural, i was eager to speak a new language and learn a new culture. 
-            i didn't expect to find that more than teaching you to know all the answers, best thing about learning a language is that it 
+            i didn't expect to find that more than teaching you to know all the answers, the best thing about learning a language is that it 
             teaches you how to listen. i arrived speaking maybe five carefully constructed sentences and left thinking 
-            in fragments of cultural context, colloquialisms, muscle memory. somewhere in that process was a lot of embarrassing mispronunciation, 
+            in fragments of cultural context, colloquialisms, and muscle memory. somewhere in that process was a lot of embarrassing mispronunciation, 
             very patient locals, and the reinforcement that language fluency is less about grammar and more about being willing to 
             sound foolish for long enough. i still miss the adrenaline rush of ordering my gelato in italian and having the waiter 
             actually respond back in italian rather than immediately noticing my very obvious foreignness. 
             <br />
             <br />
-            from a cultural perspective, the history was everywhere in siena, iterally in the walls. 
+            from a cultural perspective, the history was everywhere in siena, literally in the walls. 
             walking past medieval palazzos on the way to the grocery store, sitting in the piazza that 
             had been there for centuries, visiting museums in buildings that used to be something else 
             entirely. even the external architecture of my school and apartment buildings were preserved from the 

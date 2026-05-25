@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Footer() {
   const textStyle: CSSProperties = {
@@ -21,8 +22,8 @@ export default function Footer() {
         width: '100%',
       }}
     >
-      <span style={textStyle}>built-by-ann</span>
-      <a href="#contact" style={textStyle}>contact me</a>
+      <Link to="/" style={textStyle}>built-by-ann</Link>
+      <Link to="/contact" style={textStyle}>contact me</Link>
     </footer>
   )
 }

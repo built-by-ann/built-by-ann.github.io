@@ -1,8 +1,8 @@
 import type { CSSProperties } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const annPhoto = 'http://localhost:3845/assets/d28e6b3092c03336f3a6f56790519135757ab525.png'
-const maskSvg = 'http://localhost:3845/assets/00bdf6486fac7dccfca2aa1152ecda809ed6dac1.svg'
+const annPhoto = '/files/ann-photo.png'
+const maskSvg = '/files/hero-mask.svg'
 
 export default function Hero() {
   const navigate = useNavigate()

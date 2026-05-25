@@ -2,24 +2,34 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script>
-      (function (l) {
-        if (l.search[1] === '/') {
-          var decoded = l.search.slice(1).split('&').map(function (s) {
-            return s.replace(/~and~/g, '&');
-          }).join('?');
-          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
-        }
-      }(window.location));
-    </script>
+    <meta id="vp" name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
       (function () {
-        function applyZoom() {
-          document.documentElement.style.zoom = (window.innerWidth / 1440).toString();
+        // SPA 404 redirect handler
+        (function (l) {
+          if (l.search[1] === '/') {
+            var decoded = l.search.slice(1).split('&').map(function (s) {
+              return s.replace(/~and~/g, '&');
+            }).join('?');
+            window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+          }
+        }(window.location));
+
+        // Scale the fixed 1440px layout to fit any screen
+        var sw = screen.width;
+        if (sw < 1440) {
+          // Mobile: set viewport to 1440px with explicit initial-scale so the browser
+          // scales the layout correctly (avoids iOS minimum-font-size override issues)
+          document.getElementById('vp').content =
+            'width=1440, initial-scale=' + (sw / 1440).toFixed(5);
+        } else {
+          // Desktop: CSS zoom on html so the layout fills narrower browser windows
+          var applyZoom = function () {
+            document.documentElement.style.zoom = (window.innerWidth / 1440).toString();
+          };
+          applyZoom();
+          window.addEventListener('resize', applyZoom);
         }
-        applyZoom();
-        window.addEventListener('resize', applyZoom);
       })();
     </script>
     <title>Ann Mathew | Portfolio</title>

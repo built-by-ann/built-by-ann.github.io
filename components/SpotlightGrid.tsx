@@ -1,8 +1,8 @@
 import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 
-const researchPhoto = 'http://localhost:3845/assets/18457b0c6c584b1d8f3f366489f33583f436a87d.png'
-const italyPhoto = 'http://localhost:3845/assets/70e1be8aec55093a5e2647e978cd1a74cdf28a51.png'
+const researchPhoto = '/files/research-photo.png'
+const italyPhoto = '/files/italy-photo.png'
 
 function ImageCard({ src, width = 532, to }: { src: string; width?: number; to?: string }) {
   const inner = (
