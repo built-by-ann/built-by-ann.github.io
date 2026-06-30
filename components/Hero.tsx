@@ -98,10 +98,10 @@ export default function Hero() {
       </div>
 
       {/* CTA buttons */}
-      <a href="https://github.com/built-by-ann" target="_blank" rel="noreferrer" style={{ ...btnStyle, position: 'absolute', left: 188, top: 760 }}>
-        check out my github!
+      <a href="https://built-by-ann.github.io/spotlights" target="_blank" rel="noreferrer" style={{ ...btnStyle, position: 'absolute', left: 188, top: 760 }}>
+        check out my projects!
       </a>
-      <a href="/files/AnnMathew_CSResume_2026.pdf" target="_blank" rel="noreferrer" style={{ ...btnStyle, position: 'absolute', left: 777, top: 760 }}>
+      <a href="/files/AnnMathew_Resume.pdf" target="_blank" rel="noreferrer" style={{ ...btnStyle, position: 'absolute', left: 777, top: 760 }}>
         download my resume!
       </a>
     </section>

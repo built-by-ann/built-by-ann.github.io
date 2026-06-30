@@ -1,4 +1,4 @@
-const resumePdf = '/files/AnnMathew_CSResume_2026.pdf'
+const resumePdf = '/files/AnnMathew_Resume.pdf'
 
 export default function ResumePage() {
   return (

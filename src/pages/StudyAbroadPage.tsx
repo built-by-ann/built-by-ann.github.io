@@ -28,43 +28,17 @@ const galleryPhotos = [
   { id: 1, caption: 'piazza del campo at golden hour', src: '/files/siena.png' },
   { id: 2, caption: 'siena\'s medieval streets', src: '/files/siena_medieval_buildings.png' },
   { id: 3, caption: 'carnevale di foiano della chiana', src: '/files/foiano_carnivale.png' },
-  { id: 4, caption: 'evening walks with good company' },
-  { id: 5, caption: 'the duomo, finally in person' },
-  { id: 6, caption: 'market day in siena' },
-  { id: 7, caption: 'pasta-making class gone slightly wrong' },
-  { id: 8, caption: 'last weekend in rome' },
-  { id: 9, caption: 'the view that made it all worth it' },
-  { id: 10, caption: 'speaking italian badly but trying anyway' },
-  { id: 11, caption: 'saturday morning, nowhere to be' },
-  { id: 12, caption: 'the friends who made it a home' },
+  { id: 4, caption: 'historic architecture', src: '/files/siena1.jpeg' },
+  { id: 5, caption: 'looking up at the piazza', src: '/files/siena2.jpg' },
+  { id: 6, caption: 'slice of our slower life', src: '/files/siena3.JPG' },
+  { id: 7, caption: 'my last day in siena', src: '/files/siena4.jpeg' },
+  { id: 8, caption: 'the duomo at night', src: '/files/siena5.jpeg' },
+  { id: 9, caption: 'the medieval skyline', src: '/files/siena7.jpg' },
+  { id: 10, caption: 'pano view of the duomo', src: '/files/siena8.jpg' },
+  { id: 11, caption: 'the weekly market', src: '/files/siena_market.jpg' },
+  { id: 12, caption: 'art in florence', src: '/files/florence.jpg' },
 ]
 
-function ImagePlaceholder({ style }: { style?: CSSProperties }) {
-  return (
-    <div
-      style={{
-        backgroundColor: 'rgba(190,120,128,0.18)',
-        border: '1.5px solid rgba(190,120,128,0.35)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        ...style,
-      }}
-    >
-      <span
-        style={{
-          fontFamily: "'Roboto', sans-serif",
-          fontSize: 13,
-          letterSpacing: '0.12em',
-          textTransform: 'uppercase',
-          color: 'rgba(245,215,204,0.3)',
-        }}
-      >
-        photo
-      </span>
-    </div>
-  )
-}
 
 export default function StudyAbroadPage() {
   const [hoveredPhoto, setHoveredPhoto] = useState<number | null>(null)
@@ -306,9 +280,9 @@ export default function StudyAbroadPage() {
           </p>
 
           <div style={{ flex: 2, display: 'flex', flexDirection: 'column', gap: 16 }}>
-            <ImagePlaceholder style={{ aspectRatio: '4/3', width: '100%' }} />
-            <ImagePlaceholder style={{ aspectRatio: '4/3', width: '100%' }} />
-            <ImagePlaceholder style={{ aspectRatio: '4/3', width: '100%' }} />
+            <img src="/files/lhp.jpg" alt="" style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block' }} />
+            <img src="/files/lhp1.jpg" alt="" style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block' }} />
+            <img src="/files/lhp2.jpg" alt="" style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block' }} />
           </div>
         </div>
       </div>

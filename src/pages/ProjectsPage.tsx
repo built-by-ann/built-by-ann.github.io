@@ -22,7 +22,7 @@ const projects: Project[] = [
     tagline: 'an intelligent morning assistant app integrating voice interaction, habits, and task orchestration',
     skills: ['React Native', 'Expo', 'Fastify', 'MongoDB', 'Firebase Auth', 'TypeScript', 'Gemini API', 'ElevenLabs'],
     description: [
-      "morningcall is an AI-powered mobile productivity assistant designed around adaptive routines, conversational interaction, and voice-first user experiences. built using react native, fastify, mongodb, firebase authentication, and google gemini integration within a collaborative monorepo architecture, the project combines full-stack mobile development with LLM-driven orchestration systems.",
+      "morningcall is an AI-powered mobile productivity assistant designed around adaptive routines, conversational interaction, and voice-first user experiences. built using react native, fastify, mongoDB, firebase authentication, and google gemini integration within a collaborative monorepo architecture, the project combines full-stack mobile development with LLM-driven orchestration systems.",
       "with my teammates, i developed features including habit tracking, task management, conversational AI workflows, voice integration, and dynamic routine generation systems designed to adapt to user context and behavior over time. the application integrates backend API development, realtime mobile state management, authentication systems, and text-to-speech pipelines to support an end-to-end conversational productivity experience.",
       "working on morningcall taught me how to design software systems that extend beyond traditional CRUD applications into more stateful and interactive AI-driven experiences. one of the most interesting challenges was balancing technical infrastructure with user experience to build systems that functioned reliably across mobile and backend environments while also feeling intuitive, conversational, and personalized to users.",
       "the project also strengthened my understanding of mobile-first design, AI orchestration workflows, UX/UI principles, and scalable full-stack development. more importantly, it pushed me to think critically about how artificial intelligence can move beyond isolated chatbot interfaces and become embedded directly into everyday workflows and user interactions.",
@@ -103,7 +103,7 @@ const projects: Project[] = [
       "after developing design concepts in figma, we implemented the prototype using react, typescript, vite, react router, tailwind CSS, shadcn/radix ui, and react-simple-maps. the project emphasized reusable component architecture and iterative development, allowing the interface and information architecture to evolve quickly as new feedback and design decisions emerged.",
       "one of the most valuable parts of the experience was learning how collaborative product development balances user needs, technical constraints, and evolving project goals. working in a team environment strengthened my ability to communicate design rationale, iterate quickly, and think critically about how frontend systems support usability in large, content-heavy applications.",
     ],
-    github: 'https://github.com/built-by-ann',
+    github: 'https://github.com/jkim-21/Pn3roadmapredesign',
     accent: ACCENTS[0],
   },
   {
@@ -163,7 +163,7 @@ const projects: Project[] = [
       "one of the most valuable parts of the project was learning how design decisions translate into engineering constraints. building the site forced me to think carefully about visual hierarchy, spacing systems, interaction flows, maintainability, and how seemingly small frontend decisions affect the overall user experience. it also strengthened my ability to move fluidly between product thinking, interface design, and implementation rather than treating them as separate stages of development.",
       "the project reflects the kind of work i enjoy most: combining technical implementation with intentional design to create systems that feel cohesive, functional, and thoughtfully structured.",
     ],
-    github: 'https://github.com/built-by-ann',
+    github: 'https://github.com/built-by-ann/built-by-ann.github.io',
     accent: ACCENTS[0],
   },
 ]

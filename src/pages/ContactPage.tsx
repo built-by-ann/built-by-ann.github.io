@@ -81,8 +81,8 @@ export default function ContactPage() {
 
         <div>
           <div style={label}>email</div>
-          <a href="mailto:ann.e.mathew@vanderbilt.edu" style={value}>
-            ann.e.mathew@vanderbilt.edu
+          <a href="mailto:ann.e.mathew154@gmail.com" style={value}>
+            ann.e.mathew154@gmail.com
           </a>
         </div>
 
