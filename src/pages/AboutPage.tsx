@@ -220,10 +220,10 @@ export default function AboutPage() {
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
           {[
-            ['education', 'computer science and climate & environmentalstudies @ vanderbilt university'],
+            ['education', 'computer science and climate & environmental studies @ vanderbilt university'],
             ['building', 'full-stack applications, machine learning systems, and experimental AI projects'],
             ['exploring', 'healthcare technology, geospatial systems, and human-centered AI'],
-            ['looking for', 'internships and opportunities in software engineering, ML, and product engineering'],
+            ['looking for', 'opportunities in software engineering, ML, and product engineering'],
           ].map(([key, val]) => (
             <div
               key={key}
