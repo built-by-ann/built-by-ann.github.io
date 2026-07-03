@@ -10,6 +10,7 @@ interface Project {
   github: string
   label?: string
   accent: string
+  wrapSkills?: boolean
 }
 
 const ACCENTS = ['#ed8466', '#f0c3e9', '#be7880', '#f5d7cc']
@@ -17,6 +18,22 @@ const ACCENTS = ['#ed8466', '#f0c3e9', '#be7880', '#f5d7cc']
 const projects: Project[] = [
   {
     num: '01',
+    year: '2026',
+    title: 'medlens',
+    tagline: 'building an AI-powered clinical documentation reconciliation platform inspired by clinical informatics research',
+    skills: ['FastAPI', 'Python', 'React', 'TypeScript', 'PostgreSQL', 'SQLAlchemy', 'Alembic', 'Docker', 'Google Gemini', 'OpenBioLLM', 'MedGemma', 'AWS', 'GitHub Actions', 'Pytest', 'Pydantic'],
+    description: [
+      "medlens is my current flagship software engineering project and is inspired by research i conducted at vanderbilt university medical center on medication documentation inconsistencies within electronic health records. the application allows users to upload multiple synthetic clinical documents, including medication lists, visit notes, discharge summaries, progress notes, and medication reconciliation forms, then extracts structured medication information, compares documentation sources, and identifies potential reconciliation issues supported by evidence from each document.",
+      "i'm building the platform using fastAPI, postgreSQL, SQLalchemy, alembic, docker, and pydantic, with a react and typescript frontend currently in development. the AI layer is designed around a modular architecture rather than a single language model, allowing multiple providers to be evaluated through the same structured extraction pipeline. the current implementation uses google gemini, while future iterations will benchmark domain-specific medical models such as OpenBioLLM and MedGemma using identical prompts, validation logic, and evaluation criteria.",
+      "one of my primary goals with medlens is to approach it the way a professional software engineering team would build a production application. i'm planning and tracking development through github projects, organizing work into iterative sprints, writing detailed technical documentation before implementation, and treating features as individual engineering tasks with defined milestones. as the platform grows, i'm continuing to expand automated testing, CI/CD workflows, containerization, cloud deployment, and monitoring so the project demonstrates not only AI integration but also modern software engineering practices from planning through deployment.",
+      "building medlens is strengthening my understanding of backend architecture, healthcare data workflows, AI-assisted information extraction, and production engineering. one of the aspects i find most interesting is evaluating whether domain-specific medical language models actually outperform general-purpose models for structured clinical information extraction instead of assuming they will. the project is giving me the opportunity to combine software engineering, AI systems, and healthcare technology while designing an application around realistic clinical workflows rather than a standalone chatbot experience. because the platform uses only synthetic clinical data, it is intended solely as an educational and portfolio project rather than a clinical decision-support tool.",
+    ],
+    github: 'https://github.com/built-by-ann/medlens',
+    accent: ACCENTS[0],
+    wrapSkills: true,
+  },
+  {
+    num: '02',
     year: '2026',
     title: 'morningcall',
     tagline: 'an intelligent morning assistant app integrating voice interaction, habits, and task orchestration',
@@ -32,7 +49,7 @@ const projects: Project[] = [
     accent: ACCENTS[0],
   },
   {
-    num: '02',
+    num: '03',
     year: '2026',
     title: 'environmental similarity integration in herb-disease association prediction',
     tagline: 'augmenting biomedical prediction models with geospatial and climate-derived similarity data',
@@ -47,7 +64,7 @@ const projects: Project[] = [
     accent: ACCENTS[0],
   },
   {
-    num: '03',
+    num: '04',
     year: '2024',
     title: 'predicting land conversion in tennessee',
     tagline: 'deep learning for land conservation and development forecasting',
@@ -61,7 +78,7 @@ const projects: Project[] = [
     accent: ACCENTS[0],
   },
   {
-    num: '04',
+    num: '05',
     year: '2024',
     title: 'assessing medication discontinuation practices in electronic health records',
     tagline: 'clinical informatics research on EHR documentation and workflow behavior',
@@ -76,7 +93,7 @@ const projects: Project[] = [
     accent: ACCENTS[0],
   },
   {
-    num: '05',
+    num: '06',
     year: '2026',
     title: 'early wildfire smoke detection',
     tagline: 'a computer vision pipeline for early wildfire smoke and fire detection using YOLOv8m',
@@ -92,7 +109,7 @@ const projects: Project[] = [
     accent: ACCENTS[0],
   },
   {
-    num: '06',
+    num: '07',
     year: '2026',
     title: 'pn-3 state policy roadmap redesign',
     tagline: 'a UX-focused react prototype built to make state policy information easier to navigate and compare',
@@ -107,7 +124,7 @@ const projects: Project[] = [
     accent: ACCENTS[0],
   },
   {
-    num: '07',
+    num: '08',
     year: '2025',
     title: 'breast cancer classifier',
     tagline: 'medical machine learning classification',
@@ -122,7 +139,7 @@ const projects: Project[] = [
     accent: ACCENTS[0],
   },
   {
-    num: '08',
+    num: '09',
     year: '2024',
     title: 'urban heat in nashville',
     tagline: 'GIS urban heat analysis',
@@ -137,7 +154,7 @@ const projects: Project[] = [
     accent: ACCENTS[0],
   },
   {
-    num: '09',
+    num: '10',
     year: '2025',
     title: 'illegal fishing detection with satellite imagery',
     tagline: 'a machine learning system using SAR imagery and vessel tracking data to identify potential illegal fishing activity',
@@ -152,7 +169,7 @@ const projects: Project[] = [
     accent: ACCENTS[0],
   },
   {
-    num: '10',
+    num: '11',
     year: '2026',
     title: 'personal portfolio website',
     tagline: 'custom developer portfolio site',
@@ -232,7 +249,7 @@ function ProjectCard({ project, isLast }: { project: Project; isLast: boolean })
       </div>
 
       {/* Skill chips */}
-      <div style={{ display: 'flex', gap: 10, flexWrap: 'nowrap', marginBottom: 36 }}>
+      <div style={{ display: 'flex', gap: 10, flexWrap: project.wrapSkills ? 'wrap' : 'nowrap', marginBottom: 36 }}>
         {project.skills.map(skill => (
           <span key={skill} style={chipStyle}>{skill}</span>
         ))}
