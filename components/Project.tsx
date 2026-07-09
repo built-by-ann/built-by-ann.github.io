@@ -81,7 +81,7 @@ export default function OceanProject() {
       <Link to="/spotlights" style={{ ...btnStyle, position: 'absolute', left: 893, top: 260 }}>
         read more about it!
       </Link>
-      <a href="#" style={{ ...btnStyle, position: 'absolute', left: 894, top: 420, width: 357 }}>
+      <a href="https://www.youtube.com/watch?v=GAFjmWF82tA" target="_blank" rel="noreferrer" style={{ ...btnStyle, position: 'absolute', left: 894, top: 420, width: 357 }}>
         try out the demo!
       </a>
     </section>

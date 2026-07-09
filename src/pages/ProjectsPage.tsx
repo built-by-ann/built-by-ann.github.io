@@ -44,8 +44,7 @@ const projects: Project[] = [
       "working on morningcall taught me how to design software systems that extend beyond traditional CRUD applications into more stateful and interactive AI-driven experiences. one of the most interesting challenges was balancing technical infrastructure with user experience to build systems that functioned reliably across mobile and backend environments while also feeling intuitive, conversational, and personalized to users.",
       "the project also strengthened my understanding of mobile-first design, AI orchestration workflows, UX/UI principles, and scalable full-stack development. more importantly, it pushed me to think critically about how artificial intelligence can move beyond isolated chatbot interfaces and become embedded directly into everyday workflows and user interactions.",
     ],
-    github: '/files/MCPoster.pdf',
-    label: 'view the poster →',
+    github: 'https://github.com/built-by-ann/morningcall',
     accent: ACCENTS[0],
   },
   {
