@@ -1,11 +1,10 @@
 import type { CSSProperties } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const annPhoto = '/files/ann-photo.png'
 const maskSvg = '/files/hero-mask.svg'
 
 export default function Hero() {
-  const navigate = useNavigate()
   const btnStyle: CSSProperties = {
     width: 474,
     height: 86,
@@ -70,15 +69,17 @@ export default function Hero() {
         </p>
       </div>
 
-      {/* Ann's photo with SVG mask */}
-      <div
-        onClick={() => navigate('/about')}
+      {/* Ann's photo with SVG mask — semantic link for keyboard users */}
+      <Link
+        to="/about"
+        aria-label="About Ann Mathew"
         style={{
           position: 'absolute',
           left: 719,
           top: 26,
           width: 544,
           height: 725,
+          display: 'block',
           cursor: 'pointer',
           maskImage: `url('${maskSvg}')`,
           maskSize: '525px 525px',
@@ -95,7 +96,7 @@ export default function Hero() {
           alt="Ann Mathew"
           style={{ width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none' }}
         />
-      </div>
+      </Link>
 
       {/* CTA buttons */}
       <a href="https://built-by-ann.github.io/spotlights" target="_blank" rel="noreferrer" style={{ ...btnStyle, position: 'absolute', left: 188, top: 760 }}>
