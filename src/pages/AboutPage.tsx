@@ -1,32 +1,5 @@
 import type { CSSProperties } from 'react'
 
-function ImagePlaceholder({ style }: { style?: CSSProperties }) {
-  return (
-    <div
-      style={{
-        backgroundColor: 'rgba(73,0,19,0.08)',
-        border: '1.5px solid rgba(73,0,19,0.2)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        ...style,
-      }}
-    >
-      <span
-        style={{
-          fontFamily: "'Roboto', sans-serif",
-          fontSize: 12,
-          letterSpacing: '0.12em',
-          textTransform: 'uppercase',
-          color: 'rgba(73,0,19,0.25)',
-        }}
-      >
-        photo
-      </span>
-    </div>
-  )
-}
-
 const interests = [
   { label: 'machine learning & AI', note: 'from computer vision to generative systems' },
   { label: 'healthcare technology', note: 'building tools that help real people' },

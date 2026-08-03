@@ -104,8 +104,10 @@ built-by-ann.github.io/
 ```bash
 npm install
 npm run dev       # starts dev server at localhost:5173
+npm run lint      # ESLint + jsx-a11y accessibility rules
 ```
 
+Accessibility linting uses `eslint-plugin-jsx-a11y` (recommended rules) via `eslint.config.js`. Run `npm run lint` before opening a PR so common a11y issues are caught in development.
 ## Deployment
 
 ```bash
