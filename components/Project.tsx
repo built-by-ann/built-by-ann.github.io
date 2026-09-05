@@ -22,7 +22,6 @@ export default function OceanProject() {
         backgroundColor: '#f5d7cc',
         height: 740,
         position: 'relative',
-        marginTop: 130,
       }}
     >
       <h2
@@ -71,10 +70,10 @@ export default function OceanProject() {
           lineHeight: 1.4,
         }}
       >
-        for my culminating project at vanderbilt, i built an end-to-end mobile productivity system 
-        that combines task management, habit tracking, and voice interaction into a personalized 
-        morning experience. the platform integrates react native, fastify, mongoDB, firebase 
-        authentication, and LLM orchestration to support conversational workflows, context-aware 
+        for my culminating project at vanderbilt, i built an end-to-end mobile productivity system
+        that combines task management, habit tracking, and voice interaction into a personalized
+        morning experience. the platform integrates react native, fastify, mongoDB, firebase
+        authentication, and LLM orchestration to support conversational workflows, context-aware
         routine generation, and responsive cross-platform user interaction.
       </p>
 

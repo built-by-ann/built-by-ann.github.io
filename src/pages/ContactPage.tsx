@@ -102,8 +102,8 @@ export default function ContactPage() {
 
         <div>
           <div style={label}>linkedin</div>
-          <a href="https://linkedin.com/in/" target="_blank" rel="noreferrer" style={value}>
-            linkedin.com/in/ann-mathew
+          <a href="https://www.linkedin.com/in/ann-mathew154" target="_blank" rel="noreferrer" style={value}>
+            linkedin.com/in/ann-mathew154
           </a>
         </div>
 

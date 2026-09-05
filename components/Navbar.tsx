@@ -52,6 +52,7 @@ export default function Navbar() {
         </a>
         <NavLink to="/spotlights" style={navLink('/spotlights')} onMouseEnter={() => setHoveredLink('/spotlights')} onMouseLeave={() => setHoveredLink(null)}>spotlights</NavLink>
         <NavLink to="/projects" style={navLink('/projects')} onMouseEnter={() => setHoveredLink('/projects')} onMouseLeave={() => setHoveredLink(null)}>projects</NavLink>
+        <NavLink to="/medlens" style={navLink('/medlens')} onMouseEnter={() => setHoveredLink('/medlens')} onMouseLeave={() => setHoveredLink(null)}>medlens</NavLink>
         <NavLink to="/study-abroad" style={navLink('/study-abroad')} onMouseEnter={() => setHoveredLink('/study-abroad')} onMouseLeave={() => setHoveredLink(null)}>study abroad</NavLink>
         <NavLink to="/contact" style={({ isActive }) => ({ ...navLink('/contact')({ isActive }), fontWeight: 700 })} onMouseEnter={() => setHoveredLink('/contact')} onMouseLeave={() => setHoveredLink(null)}>contact me</NavLink>
       </div>

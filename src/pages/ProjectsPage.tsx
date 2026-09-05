@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { CSSProperties } from 'react'
 
 interface Project {
@@ -10,7 +11,6 @@ interface Project {
   github: string
   label?: string
   accent: string
-  wrapSkills?: boolean
 }
 
 const ACCENTS = ['#ed8466', '#f0c3e9', '#be7880', '#f5d7cc']
@@ -23,14 +23,15 @@ const projects: Project[] = [
     tagline: 'building an AI-powered clinical documentation reconciliation platform inspired by clinical informatics research',
     skills: ['FastAPI', 'Python', 'React', 'TypeScript', 'PostgreSQL', 'SQLAlchemy', 'Alembic', 'Docker', 'Google Gemini', 'OpenBioLLM', 'MedGemma', 'AWS', 'GitHub Actions', 'Pytest', 'Pydantic'],
     description: [
-      "medlens is my current flagship software engineering project and is inspired by research i conducted at vanderbilt university medical center on medication documentation inconsistencies within electronic health records. the application allows users to upload multiple synthetic clinical documents, including medication lists, visit notes, discharge summaries, progress notes, and medication reconciliation forms, then extracts structured medication information, compares documentation sources, and identifies potential reconciliation issues supported by evidence from each document.",
-      "i'm building the platform using fastAPI, postgreSQL, SQLalchemy, alembic, docker, and pydantic, with a react and typescript frontend currently in development. the AI layer is designed around a modular architecture rather than a single language model, allowing multiple providers to be evaluated through the same structured extraction pipeline. the current implementation uses google gemini, while future iterations will benchmark domain-specific medical models such as OpenBioLLM and MedGemma using identical prompts, validation logic, and evaluation criteria.",
-      "one of my primary goals with medlens is to approach it the way a professional software engineering team would build a production application. i'm planning and tracking development through github projects, organizing work into iterative sprints, writing detailed technical documentation before implementation, and treating features as individual engineering tasks with defined milestones. as the platform grows, i'm continuing to expand automated testing, CI/CD workflows, containerization, cloud deployment, and monitoring so the project demonstrates not only AI integration but also modern software engineering practices from planning through deployment.",
-      "building medlens is strengthening my understanding of backend architecture, healthcare data workflows, AI-assisted information extraction, and production engineering. one of the aspects i find most interesting is evaluating whether domain-specific medical language models actually outperform general-purpose models for structured clinical information extraction instead of assuming they will. the project is giving me the opportunity to combine software engineering, AI systems, and healthcare technology while designing an application around realistic clinical workflows rather than a standalone chatbot experience. because the platform uses only synthetic clinical data, it is intended solely as an educational and portfolio project rather than a clinical decision-support tool.",
+      "medlens is my flagship software engineering project and was inspired by research i conducted at vanderbilt university medical center on medication documentation inconsistencies within electronic health records. the application simulates a simplified EHR environment where users can upload synthetic clinical documents, including visit notes, discharge summaries, progress notes, and medication reconciliation forms, then compare those documents against an existing medication list to identify potential reconciliation issues. every finding is linked directly to supporting evidence so users can review exactly why a discrepancy was detected before deciding whether to update the medication list.",
+      "i built the application with a react and typescript frontend and a fastAPI backend backed by postgreSQL, SQLalchemy, alembic, and docker. authentication is handled with JWT, analyses and uploaded documents are stored in a relational database, and the application is deployed on AWS using EC2 and S3. the AI layer is intentionally modular so different language models can be evaluated without changing the surrounding application architecture. the current implementation uses google gemini to extract structured medication information from clinical documents before deterministic reconciliation logic analyzes the extracted data and identifies potential discrepancies.",
+      "one of my primary goals with medlens has been to build it the way a professional software engineering team would approach a production application. i planned the project before writing code, organized development into iterative sprints, tracked work through github projects, wrote technical documentation for major architectural decisions, and treated every feature as an individual engineering task with its own requirements and testing strategy. the project also includes automated testing with pytest, CI workflows through github actions, containerized development with docker, and cloud deployment on AWS so the engineering process is just as important as the final product.",
+      "building medlens has strengthened my understanding of backend architecture, REST API design, authentication, database modeling, AI-assisted information extraction, and healthcare data workflows. one of the questions i find most interesting is whether specialized medical language models actually perform better than general-purpose models for structured clinical information extraction when evaluated under the same conditions. rather than assuming one model is better, i want to compare them using the same prompts, validation logic, and evaluation criteria to understand where each approach succeeds and falls short.",
+      "because the application uses only synthetic patient data, medlens is intended solely as an educational and portfolio project. its purpose is to explore how AI can fit into realistic clinical workflows while demonstrating modern software engineering practices from planning and architecture through deployment and testing.",
     ],
-    github: 'https://github.com/built-by-ann/medlens',
+    github: 'https://medlenshealth.com',
+    label: 'view the live site →',
     accent: ACCENTS[0],
-    wrapSkills: true,
   },
   {
     num: '02',
@@ -195,10 +196,12 @@ const descStyle: CSSProperties = {
   marginBottom: 16,
 }
 
-function ProjectCard({ project, isLast }: { project: Project; isLast: boolean }) {
+const ink = '#490013'
+
+function ProjectCard({ project, isLast, expanded, onToggle }: { project: Project; isLast: boolean; expanded: boolean; onToggle: () => void }) {
   const chipStyle: CSSProperties = {
-    border: `1.5px solid ${project.accent}`,
-    color: project.accent,
+    border: `1.5px solid ${ink}`,
+    color: ink,
     fontFamily: "'Roboto', sans-serif",
     fontWeight: 500,
     fontSize: 15,
@@ -209,84 +212,136 @@ function ProjectCard({ project, isLast }: { project: Project; isLast: boolean })
   return (
     <div
       style={{
-        paddingTop: 48,
-        paddingBottom: isLast ? 48 : 64,
-        borderTop: '1.5px solid #be7880',
+        padding: '40px 44px',
+        marginBottom: isLast ? 0 : 24,
+        border: `1.5px solid ${ink}`,
+        backgroundColor: project.accent,
+        minHeight: expanded ? undefined : 410,
       }}
     >
-      {/* Header */}
-      <div style={{ marginBottom: 20 }}>
-        <div
-          style={{
-            fontFamily: "'Roboto', sans-serif",
-            fontWeight: 500,
-            fontSize: 13,
-            color: '#be7880',
-            letterSpacing: '0.15em',
-            textTransform: 'uppercase',
-            marginBottom: 10,
-          }}
-        >
-          project {project.num} · {project.year}
+      {/* Header — click to expand/collapse the full write-up */}
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={expanded}
+        style={{
+          display: 'flex',
+          alignItems: 'flex-start',
+          justifyContent: 'space-between',
+          gap: 24,
+          width: '100%',
+          background: 'none',
+          border: 'none',
+          padding: 0,
+          margin: 0,
+          marginBottom: 20,
+          cursor: 'pointer',
+          textAlign: 'left',
+          font: 'inherit',
+        }}
+      >
+        <div>
+          <div
+            style={{
+              fontFamily: "'Roboto', sans-serif",
+              fontStyle: 'normal',
+              fontWeight: 500,
+              fontSize: 13,
+              color: ink,
+              opacity: 0.6,
+              letterSpacing: '0.15em',
+              textTransform: 'uppercase',
+              marginBottom: 10,
+            }}
+          >
+            project {project.num} · {project.year}
+          </div>
+          <h2
+            style={{
+              fontFamily: "'Outfit', sans-serif",
+              fontStyle: 'normal',
+              fontWeight: 700,
+              fontSize: 56,
+              color: ink,
+              lineHeight: 1,
+              margin: 0,
+              marginBottom: 14,
+            }}
+          >
+            {project.title}
+          </h2>
+          <p style={{ fontFamily: "'Roboto', sans-serif", fontStyle: 'normal', fontWeight: 700, fontSize: 20, color: ink, opacity: 0.7, margin: 0 }}>
+            {project.tagline}
+          </p>
         </div>
-        <h2
+
+        <div
+          aria-hidden="true"
           style={{
+            width: 44,
+            height: 44,
+            flexShrink: 0,
+            border: `1.5px solid ${ink}`,
+            color: ink,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
             fontFamily: "'Outfit', sans-serif",
+            fontStyle: 'normal',
             fontWeight: 700,
-            fontSize: 56,
-            color: project.accent,
-            lineHeight: 1,
-            margin: 0,
-            marginBottom: 14,
+            fontSize: 22,
           }}
         >
-          {project.title}
-        </h2>
-        <p style={{ fontFamily: "'Roboto', sans-serif", fontWeight: 700, fontSize: 20, color: '#f5d7cc', margin: 0 }}>
-          {project.tagline}
-        </p>
-      </div>
+          {expanded ? '−' : '+'}
+        </div>
+      </button>
 
-      {/* Skill chips */}
-      <div style={{ display: 'flex', gap: 10, flexWrap: project.wrapSkills ? 'wrap' : 'nowrap', marginBottom: 36 }}>
+      {/* Skill chips — visible whether or not the card is expanded */}
+      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: expanded ? 36 : 0 }}>
         {project.skills.map(skill => (
           <span key={skill} style={chipStyle}>{skill}</span>
         ))}
       </div>
 
-      {/* Description paragraphs */}
-      <div>
-        {project.description.map((para, i) => (
-          <p key={i} style={{ ...descStyle, marginBottom: i < project.description.length - 1 ? 16 : 0 }}>
-            {para}
-          </p>
-        ))}
-      </div>
+      {expanded && (
+        <>
+          {/* Description paragraphs */}
+          <div>
+            {project.description.map((para, i) => (
+              <p key={i} style={{ ...descStyle, color: ink, marginBottom: i < project.description.length - 1 ? 16 : 0 }}>
+                {para}
+              </p>
+            ))}
+          </div>
 
-      <a
-        href={project.github}
-        target="_blank"
-        rel="noreferrer"
-        style={{
-          display: 'inline-block',
-          marginTop: 28,
-          backgroundColor: '#1e3f55',
-          color: '#f5d7cc',
-          fontFamily: "'Roboto', sans-serif",
-          fontWeight: 400,
-          fontSize: 18,
-          padding: '14px 32px',
-          textDecoration: 'none',
-          whiteSpace: 'nowrap',
-        }}
-      >
-        {project.label ?? 'view on github →'}
-      </a>
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noreferrer"
+            style={{
+              display: 'inline-block',
+              marginTop: 28,
+              backgroundColor: ink,
+              color: project.accent,
+              fontFamily: "'Roboto', sans-serif",
+              fontWeight: 400,
+              fontSize: 18,
+              padding: '14px 32px',
+              textDecoration: 'none',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {project.label ?? 'view on github →'}
+          </a>
+        </>
+      )}
     </div>
   )
 }
 
 export default function ProjectsPage() {
+  const [expandedNum, setExpandedNum] = useState<string | null>(null)
+
   return (
     <div
       style={{
@@ -323,9 +378,15 @@ export default function ProjectsPage() {
         everything i've built, broken, fixed, collaborated on, and learned from
       </p>
 
-      <div style={{ borderBottom: '1.5px solid #be7880' }}>
+      <div>
         {projects.map((project, i) => (
-          <ProjectCard key={project.num} project={project} isLast={i === projects.length - 1} />
+          <ProjectCard
+            key={project.num}
+            project={{ ...project, accent: ACCENTS[i % ACCENTS.length] }}
+            isLast={i === projects.length - 1}
+            expanded={expandedNum === project.num}
+            onToggle={() => setExpandedNum(current => (current === project.num ? null : project.num))}
+          />
         ))}
       </div>
     </div>

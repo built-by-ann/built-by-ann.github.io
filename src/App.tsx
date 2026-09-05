@@ -9,6 +9,7 @@ import SpotlightsPage from './pages/SpotlightsPage'
 import StudyAbroadPage from './pages/StudyAbroadPage'
 import ContactPage from './pages/ContactPage'
 import AboutPage from './pages/AboutPage'
+import MedlensPage from './pages/MedlensPage'
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation()
@@ -39,6 +40,7 @@ export default function App() {
           <Route path="/study-abroad" element={<StudyAbroadPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/medlens" element={<MedlensPage />} />
         </Routes>
         <Footer />
       </div>

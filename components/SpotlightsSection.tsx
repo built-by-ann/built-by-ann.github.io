@@ -17,6 +17,19 @@ const spotlights: Spotlight[] = [
   {
     num: '01',
     year: '2026',
+    title: 'medlens',
+    tagline: 'building an AI-powered clinical documentation reconciliation platform inspired by clinical informatics research',
+    skills: ['FastAPI', 'Python', 'React', 'TypeScript', 'PostgreSQL', 'SQLAlchemy', 'Alembic', 'Docker', 'Google Gemini', 'OpenBioLLM', 'MedGemma', 'AWS', 'GitHub Actions', 'Pytest', 'Pydantic'],
+    description:
+      "medlens is my flagship software engineering project and was inspired by research i conducted at vanderbilt university medical center on medication documentation inconsistencies within electronic health records. the application simulates a simplified EHR environment where users can upload synthetic clinical documents, including visit notes, discharge summaries, progress notes, and medication reconciliation forms, then compare those documents against an existing medication list to identify potential reconciliation issues. every finding is linked directly to supporting evidence so users can review exactly why a discrepancy was detected before deciding whether to update the medication list.\n\ni built the application with a react and typescript frontend and a fastapi backend backed by postgresql, sqlalchemy, alembic, and docker. authentication is handled with JWT, analyses and uploaded documents are stored in a relational database, and the application is deployed on AWS using EC2 and S3. the AI layer is intentionally modular so different language models can be evaluated without changing the surrounding application architecture. the current implementation uses google gemini to extract structured medication information from clinical documents before deterministic reconciliation logic analyzes the extracted data and identifies potential discrepancies.\n\none of my primary goals with medlens has been to build it the way a professional software engineering team would approach a production application. i planned the project before writing code, organized development into iterative sprints, tracked work through github projects, wrote technical documentation for major architectural decisions, and treated every feature as an individual engineering task with its own requirements and testing strategy. the project also includes automated testing with pytest, CI workflows through github actions, containerized development with docker, and cloud deployment on AWS so the engineering process is just as important as the final product.\n\nbuilding medlens has strengthened my understanding of backend architecture, REST API design, authentication, database modeling, AI-assisted information extraction, and healthcare data workflows. one of the questions i find most interesting is whether specialized medical language models actually perform better than general-purpose models for structured clinical information extraction when evaluated under the same conditions. rather than assuming one model is better, i want to compare them using the same prompts, validation logic, and evaluation criteria to understand where each approach succeeds and falls short.\n\nbecause the application uses only synthetic patient data, medlens is intended solely as an educational and portfolio project. its purpose is to explore how AI can fit into realistic clinical workflows while demonstrating modern software engineering practices from planning and architecture through deployment and testing.",
+    github: 'https://medlenshealth.com',
+    label: 'view the live site →',
+    bg: '#f0c3e9',
+    id: 'medlens',
+  },
+  {
+    num: '02',
+    year: '2026',
     title: 'morningcall',
     tagline: 'an intelligent morning assistant app integrating voice interaction, habits, and task orchestration',
     skills: ['React Native', 'Expo', 'Fastify', 'MongoDB', 'Firebase Auth', 'TypeScript', 'Gemini API', 'ElevenLabs'],
@@ -27,41 +40,7 @@ const spotlights: Spotlight[] = [
     id: 'morningcall',
   },
   {
-    num: '02',
-    year: '2026',
-    title: 'medlens',
-    tagline: 'building an AI-powered clinical documentation reconciliation platform inspired by clinical informatics research',
-    skills: ['FastAPI', 'Python', 'React', 'TypeScript', 'PostgreSQL', 'SQLAlchemy', 'Alembic', 'Docker', 'Google Gemini', 'OpenBioLLM', 'MedGemma', 'AWS', 'GitHub Actions', 'Pytest', 'Pydantic'],
-    description:
-      "medlens is my current flagship software engineering project and is inspired by research i conducted at vanderbilt university medical center on medication documentation inconsistencies within electronic health records. the application allows users to upload multiple synthetic clinical documents, including medication lists, visit notes, discharge summaries, progress notes, and medication reconciliation forms, then extracts structured medication information, compares documentation sources, and identifies potential reconciliation issues supported by evidence from each document.\n\ni'm building the platform using fastapi, postgresql, sqlalchemy, alembic, docker, and pydantic, with a react and typescript frontend currently in development. the AI layer is designed around a modular architecture rather than a single language model, allowing multiple providers to be evaluated through the same structured extraction pipeline. the current implementation uses google gemini, while future iterations will benchmark domain-specific medical models such as OpenBioLLM and MedGemma using identical prompts, validation logic, and evaluation criteria.\n\none of my primary goals with medlens is to approach it the way a professional software engineering team would build a production application. i'm planning and tracking development through github projects, organizing work into iterative sprints, writing detailed technical documentation before implementation, and treating features as individual engineering tasks with defined milestones. as the platform grows, i'm continuing to expand automated testing, CI/CD workflows, containerization, cloud deployment, and monitoring so the project demonstrates not only AI integration but also modern software engineering practices from planning through deployment.\n\nbuilding medlens is strengthening my understanding of backend architecture, healthcare data workflows, AI-assisted information extraction, and production engineering. one of the aspects i find most interesting is evaluating whether domain-specific medical language models actually outperform general-purpose models for structured clinical information extraction instead of assuming they will. the project is giving me the opportunity to combine software engineering, AI systems, and healthcare technology while designing an application around realistic clinical workflows rather than a standalone chatbot experience. because the platform uses only synthetic clinical data, it is intended solely as an educational and portfolio project rather than a clinical decision-support tool.",
-    github: 'https://github.com/built-by-ann/medlens',
-    bg: '#f0c3e9',
-    id: 'medlens',
-  },
-  {
     num: '03',
-    year: '2026',
-    title: 'environmental similarity integration in herb-disease association prediction',
-    tagline: 'augmenting biomedical prediction models with geospatial and climate-derived similarity data',
-    skills: ['Python', 'Scientific Computing', 'Network Analysis', 'AUROC/AUPR Evaluation', 'Climate Similarity Modeling'],
-    description:
-      "for my culminating research project in network analysis in healthcare, i worked in a two-person team to extend the HDAPM-NCP herb–disease association prediction framework by integrating environmental similarity data derived from climate, biome, and geographic occurrence records. the project explored whether medicinal plants growing in similar environmental conditions also exhibit similar therapeutic relationships.\n\nour work involved building reproducible data processing pipelines using python scientific computing tools, harvesting species occurrence data through GBIF, engineering climate similarity kernels using köppen–geiger climate classifications, and evaluating fusion strategies for integrating environmental and biochemical similarity measures. i also worked extensively with network analysis concepts, similarity matrices, and performance evaluation metrics such as AUROC and AUPR to assess predictive performance across multiple experimental configurations.\n\none of the most interesting aspects of the project was discovering that meaningful research outcomes are not always defined by improved model performance. although environmental similarity produced minimal predictive gains, the work revealed important insights about feature redundancy, sparse environmental representations, and the complexity of translating ecological relationships into computational signals. the experience taught me how to critically evaluate negative or neutral results while still recognizing their scientific value and methodological contributions.\n\nthe project strengthened my understanding of network medicine, machine learning evaluation, scientific research methodology, and reproducible computational workflows while exposing me to the intersection of environmental systems, pharmacology, and data science.",
-    github: 'https://github.com/Tobena-04/Climate-Informed-Herb-Disease-Association-Prediction/blob/a3779e362b1bd726f700ca354409b638d17ae9d0/%5BNEW%5DNetwork_Analysis_in_Healthcare_Final__Predicting_Herb_Disease_Associations_Informed_by_Climatic_Descriptors.pdf',
-    bg: '#be7880',
-  },
-  {
-    num: '04',
-    year: '2024',
-    title: 'predicting land conversion in tennessee',
-    tagline: 'deep learning for land conservation and development forecasting',
-    skills: ['Python', 'PyTorch', 'ConvLSTM', 'QGIS', 'Rasterio', 'Remote Sensing', 'Geospatial Analysis'],
-    description:
-      "as part of vanderbilt data science in 2024, i worked on a geospatial machine learning project in collaboration with the land trust of tennessee focused on forecasting future land conversion across the state. using NLCD satellite raster datasets, our team developed a ConvLSTM deep learning pipeline to model how natural and agricultural land may transition into developed areas over time.\n\nmy work involved processing large geospatial raster datasets, extracting and filtering image patches with rasterio, and helping build preprocessing workflows for spatiotemporal prediction modeling. i also worked with geospatial visualization tools such as QGIS to analyze and interpret future land cover prediction maps. the project introduced challenges involving large GeoTIFF files, computational constraints, and balancing spatial accuracy with scalable machine learning workflows.\n\nbeyond technical implementation, the experience showed me how machine learning and environmental science intersect with real conservation decision-making. collaborating on a project tied directly to land preservation efforts helped me think more critically about how predictive models can support real-world environmental planning, sustainability initiatives, and stakeholder needs.",
-    github: 'https://github.com/built-by-ann/land-trust-project',
-    bg: '#f5d7cc',
-  },
-  {
-    num: '05',
     year: '2024',
     title: 'assessing medication discontinuation practices in electronic health records',
     tagline: 'clinical informatics research on EHR documentation and workflow behavior',
@@ -70,7 +49,7 @@ const spotlights: Spotlight[] = [
       "as a summer 2024 research intern in vanderbilt university medical center's department of biomedical informatics, i investigated inconsistencies in medication discontinuation practices within electronic health records. my work involved extracting and analyzing large-scale clinical encounter data to identify patterns in how medications marked for removal persisted on patient medication lists.\n\nin addition to quantitative analysis, i worked closely with physicians, nurses, and clinical researchers to better understand how these documentation issues emerge within real healthcare workflows. speaking directly with medical professionals helped me connect technical data patterns to the operational realities of patient care, provider coordination, and EHR system design.\n\ni also presented findings to mentors, phd researchers, medical students, and peers, learning how to communicate complex technical and clinical insights to interdisciplinary audiences. the experience showed me how healthcare technology challenges often exist at the intersection of data systems, human behavior, and clinical workflow constraints.",
     github: '/files/AnnMathew_Abstract.pdf',
     label: 'view the abstract →',
-    bg: '#ed8466',
+    bg: '#f5d7cc',
     id: 'vumc',
   },
 ]

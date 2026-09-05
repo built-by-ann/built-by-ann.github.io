@@ -28,10 +28,10 @@ function ImagePlaceholder({ style }: { style?: CSSProperties }) {
 }
 
 const interests = [
-  { label: 'machine learning & AI', note: 'from computer vision to generative systems' },
-  { label: 'healthcare technology', note: 'building tools that help real people' },
   { label: 'full-stack development', note: 'i like knowing how the whole thing works' },
-  { label: 'UX & product thinking', note: 'design is part of engineering, not separate' },
+  { label: 'healthcare technology', note: 'building tools that help real people' },
+  { label: 'machine learning & ai', note: 'from computer vision to generative systems' },
+  { label: 'ux and product thinking', note: 'design is part of engineering, not separate' },
   { label: 'geospatial & environmental tech', note: 'data that connects code to the physical world' },
   { label: 'systems thinking', note: 'how systems connect and affect each other' },
 ]
@@ -102,10 +102,11 @@ export default function AboutPage() {
           </p>
 
           <p style={{ ...body, marginBottom: 20 }}>
-            i'm a recent grad with a background that spans software engineering, machine learning, 
-            full-stack development, geospatial data science, and UX. i have always pursued projects 
-            where engineering, research, and human behavior intersect because i believe that the most 
-            interesting problems sit at the edges between fields.
+            i'm a recent grad with a background that spans software engineering, ai integration,
+            full-stack development, machine learning, clinical informatics, geospatial data science,
+            and UX. i have always pursued projects where engineering, research, and human behavior
+            intersect because i believe that the most interesting problems sit at the edges between
+            fields.
           </p>
           <p style={body}>
             i'm drawn to work that connects technical depth with real-world impact, especially in
@@ -221,6 +222,7 @@ export default function AboutPage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
           {[
             ['education', 'computer science and climate & environmental studies @ vanderbilt university'],
+            ['career', 'forward deployed engineer intern @ ncompas business solutions'],
             ['building', 'full-stack applications, machine learning systems, and experimental AI projects'],
             ['exploring', 'healthcare technology, geospatial systems, and human-centered AI'],
             ['looking for', 'opportunities in software engineering, ML, and product engineering'],
@@ -303,10 +305,10 @@ export default function AboutPage() {
                 'managed event logistics and cross-team coordination for some of the largest events on campus. the experience taught me real-time problem solving, adaptability, and how much strong operations work shapes the success of everything around it.',
             },
             {
-              role: 'teaching assistant',
-              context: 'vanderbilt university',
+              role: 'ai champions instructor',
+              context: 'mentisprep',
               description:
-                'served as a teaching assistant for the climate studies department, holding office hours and providing feedback on academic and research writing. it taught me that explaining complex ideas clearly is a skill entirely separate from understanding them yourself.',
+                'instructing a 34-week ai program for high school students, teaching python, ai applications, and responsible ai through hands-on projects. the role has strengthened my ability to explain technical concepts clearly and guide students as they build increasingly complex software.',
             },
             {
               role: 'enviro-equity health initiative',
@@ -315,7 +317,7 @@ export default function AboutPage() {
                 'spent a summer conducting research for a nonprofit focused on environmental justice and skin health in underserved agricultural communities. it reinforced how different technical and research work feels when the people affected by it are visible and immediate.',
             },
             {
-              role: 'retail',
+              role: 'retail associate',
               context: 'customer-facing work',
               description:
                 'worked retail throughout college, which grounded me in ways academic environments often don\'t. it taught me patience, adaptability, resilience, and how much communication and proactive thinking matter in fast-moving, unpredictable situations.',
