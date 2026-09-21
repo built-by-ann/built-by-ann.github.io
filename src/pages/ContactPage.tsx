@@ -1,3 +1,5 @@
+import { creamMuted } from '../colors'
+
 export default function ContactPage() {
   const label = {
     fontFamily: "'Roboto', sans-serif" as const,
@@ -5,7 +7,7 @@ export default function ContactPage() {
     fontSize: 11,
     letterSpacing: '0.18em',
     textTransform: 'uppercase' as const,
-    color: 'rgba(245,215,204,0.45)',
+    color: creamMuted,
     marginBottom: 10,
   }
 
@@ -38,7 +40,7 @@ export default function ContactPage() {
           fontSize: 12,
           letterSpacing: '0.18em',
           textTransform: 'uppercase',
-          color: 'rgba(245,215,204,0.45)',
+          color: creamMuted,
           marginBottom: 20,
         }}
       >

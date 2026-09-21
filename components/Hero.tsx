@@ -1,11 +1,10 @@
 import type { CSSProperties } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const annPhoto = '/files/ann-photo.png'
 const maskSvg = '/files/hero-mask.svg'
 
 export default function Hero() {
-  const navigate = useNavigate()
   const btnStyle: CSSProperties = {
     width: 474,
     height: 86,
@@ -21,7 +20,7 @@ export default function Hero() {
   }
 
   return (
-    <section
+    <div
       style={{
         backgroundColor: '#490013',
         height: 846,
@@ -71,31 +70,33 @@ export default function Hero() {
       </div>
 
       {/* Ann's photo with SVG mask */}
-      <div
-        onClick={() => navigate('/about')}
-        style={{
-          position: 'absolute',
-          left: 719,
-          top: 26,
-          width: 544,
-          height: 725,
-          cursor: 'pointer',
-          maskImage: `url('${maskSvg}')`,
-          maskSize: '525px 525px',
-          maskRepeat: 'no-repeat',
-          maskPosition: '9px 100px',
-          WebkitMaskImage: `url('${maskSvg}')`,
-          WebkitMaskSize: '525px 525px',
-          WebkitMaskRepeat: 'no-repeat',
-          WebkitMaskPosition: '9px 100px',
-        } as CSSProperties}
+      {/* Link wraps the masked photo (not the other way round) so the focus ring isn't clipped by the mask */}
+      <Link
+        to="/about"
+        aria-label="learn more about ann mathew"
+        style={{ position: 'absolute', left: 719, top: 26, width: 544, height: 725, display: 'block' }}
       >
-        <img
-          src={annPhoto}
-          alt="Ann Mathew"
-          style={{ width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none' }}
-        />
-      </div>
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            maskImage: `url('${maskSvg}')`,
+            maskSize: '525px 525px',
+            maskRepeat: 'no-repeat',
+            maskPosition: '9px 100px',
+            WebkitMaskImage: `url('${maskSvg}')`,
+            WebkitMaskSize: '525px 525px',
+            WebkitMaskRepeat: 'no-repeat',
+            WebkitMaskPosition: '9px 100px',
+          } as CSSProperties}
+        >
+          <img
+            src={annPhoto}
+            alt=""
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          />
+        </div>
+      </Link>
 
       {/* CTA buttons */}
       <a href="https://built-by-ann.github.io/spotlights" target="_blank" rel="noreferrer" style={{ ...btnStyle, position: 'absolute', left: 188, top: 760 }}>
@@ -104,6 +105,6 @@ export default function Hero() {
       <a href="/files/AnnMathew_Resume.pdf" target="_blank" rel="noreferrer" style={{ ...btnStyle, position: 'absolute', left: 777, top: 760 }}>
         download my resume!
       </a>
-    </section>
+    </div>
   )
 }

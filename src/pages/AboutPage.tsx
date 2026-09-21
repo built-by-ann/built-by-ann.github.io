@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react'
+import { inkMuted, creamMuted } from '../colors'
 
 function ImagePlaceholder({ style }: { style?: CSSProperties }) {
   return (
@@ -18,7 +19,7 @@ function ImagePlaceholder({ style }: { style?: CSSProperties }) {
           fontSize: 12,
           letterSpacing: '0.12em',
           textTransform: 'uppercase',
-          color: 'rgba(73,0,19,0.25)',
+          color: inkMuted,
         }}
       >
         photo
@@ -45,7 +46,7 @@ export default function AboutPage() {
     fontSize: 12,
     letterSpacing: '0.18em',
     textTransform: 'uppercase',
-    color: 'rgba(73,0,19,0.4)',
+    color: inkMuted,
     marginBottom: 20,
   }
 
@@ -122,7 +123,7 @@ export default function AboutPage() {
         <div style={{ flex: 2 }}>
           <img
             src="/files/GradImage.png"
-            alt="Ann Mathew"
+            alt="Ann Mathew smiling in a navy Vanderbilt graduation gown with a gold and black honor cord"
             style={{ width: '100%', aspectRatio: '3/4', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
           />
         </div>
@@ -137,7 +138,7 @@ export default function AboutPage() {
             fontSize: 12,
             letterSpacing: '0.18em',
             textTransform: 'uppercase',
-            color: 'rgba(245,215,204,0.45)',
+            color: creamMuted,
             marginBottom: 20,
           }}
         >
@@ -244,7 +245,7 @@ export default function AboutPage() {
                   fontSize: 12,
                   letterSpacing: '0.15em',
                   textTransform: 'uppercase',
-                  color: 'rgba(73,0,19,0.4)',
+                  color: inkMuted,
                   minWidth: 120,
                   flexShrink: 0,
                 }}
@@ -276,7 +277,7 @@ export default function AboutPage() {
             fontSize: 12,
             letterSpacing: '0.18em',
             textTransform: 'uppercase',
-            color: 'rgba(245,215,204,0.45)',
+            color: creamMuted,
             marginBottom: 20,
           }}
         >
@@ -361,7 +362,7 @@ export default function AboutPage() {
                   fontSize: 11,
                   letterSpacing: '0.15em',
                   textTransform: 'uppercase',
-                  color: 'rgba(245,215,204,0.45)',
+                  color: creamMuted,
                   marginBottom: 20,
                 }}
               >

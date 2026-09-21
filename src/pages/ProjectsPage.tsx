@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { CSSProperties } from 'react'
+import { linkName } from '../LinkLabel'
 
 interface Project {
   num: string
@@ -209,8 +210,11 @@ function ProjectCard({ project, isLast, expanded, onToggle }: { project: Project
     whiteSpace: 'nowrap',
   }
 
+  const titleId = `project-${project.num}-title`
+
   return (
-    <div
+    <article
+      aria-labelledby={titleId}
       style={{
         padding: '40px 44px',
         marginBottom: isLast ? 0 : 24,
@@ -219,25 +223,18 @@ function ProjectCard({ project, isLast, expanded, onToggle }: { project: Project
         minHeight: expanded ? undefined : 410,
       }}
     >
-      {/* Header — click to expand/collapse the full write-up */}
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-expanded={expanded}
+      {/* Header — click anywhere on it to expand/collapse the full write-up. The heading lives
+          outside the button (a button's children aren't exposed as headings); the button is a
+          transparent overlay named by that heading. */}
+      <div
         style={{
+          position: 'relative',
           display: 'flex',
           alignItems: 'flex-start',
           justifyContent: 'space-between',
           gap: 24,
           width: '100%',
-          background: 'none',
-          border: 'none',
-          padding: 0,
-          margin: 0,
           marginBottom: 20,
-          cursor: 'pointer',
-          textAlign: 'left',
-          font: 'inherit',
         }}
       >
         <div>
@@ -248,7 +245,6 @@ function ProjectCard({ project, isLast, expanded, onToggle }: { project: Project
               fontWeight: 500,
               fontSize: 13,
               color: ink,
-              opacity: 0.6,
               letterSpacing: '0.15em',
               textTransform: 'uppercase',
               marginBottom: 10,
@@ -257,6 +253,7 @@ function ProjectCard({ project, isLast, expanded, onToggle }: { project: Project
             project {project.num} · {project.year}
           </div>
           <h2
+            id={titleId}
             style={{
               fontFamily: "'Outfit', sans-serif",
               fontStyle: 'normal',
@@ -294,7 +291,15 @@ function ProjectCard({ project, isLast, expanded, onToggle }: { project: Project
         >
           {expanded ? '−' : '+'}
         </div>
-      </button>
+
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-expanded={expanded}
+          aria-labelledby={titleId}
+          style={{ position: 'absolute', inset: 0, background: 'none', border: 'none', padding: 0, margin: 0, cursor: 'pointer' }}
+        />
+      </div>
 
       {/* Skill chips — visible whether or not the card is expanded */}
       <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: expanded ? 36 : 0 }}>
@@ -316,6 +321,7 @@ function ProjectCard({ project, isLast, expanded, onToggle }: { project: Project
 
           <a
             href={project.github}
+            aria-label={linkName(project.label ?? 'view on github →', project.title)}
             target="_blank"
             rel="noreferrer"
             style={{
@@ -335,7 +341,7 @@ function ProjectCard({ project, isLast, expanded, onToggle }: { project: Project
           </a>
         </>
       )}
-    </div>
+    </article>
   )
 }
 

@@ -1,11 +1,12 @@
 import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
+import { roseDeep, roseMid } from '../src/colors'
 
 export default function OceanProject() {
   const btnStyle: CSSProperties = {
     width: 358,
     height: 86,
-    backgroundColor: '#be7880',
+    backgroundColor: roseMid,
     color: '#f5d7cc',
     fontFamily: "'Roboto', sans-serif",
     fontWeight: 500,
@@ -18,6 +19,7 @@ export default function OceanProject() {
 
   return (
     <section
+      aria-labelledby="morningcall-feature-title"
       style={{
         backgroundColor: '#f5d7cc',
         height: 740,
@@ -25,6 +27,7 @@ export default function OceanProject() {
       }}
     >
       <h2
+        id="morningcall-feature-title"
         style={{
           position: 'absolute',
           left: 188,
@@ -32,7 +35,7 @@ export default function OceanProject() {
           fontFamily: "'Outfit', sans-serif",
           fontWeight: 700,
           fontSize: 68,
-          color: '#ed8466',
+          color: '#490013',
           width: 708,
           lineHeight: 1,
           margin: 0,
@@ -49,7 +52,7 @@ export default function OceanProject() {
           fontFamily: "'Roboto', sans-serif",
           fontWeight: 700,
           fontSize: 24,
-          color: '#ed8466',
+          color: roseDeep,
           width: 376,
           lineHeight: 1.3,
         }}
@@ -77,7 +80,7 @@ export default function OceanProject() {
         routine generation, and responsive cross-platform user interaction.
       </p>
 
-      <Link to="/spotlights" style={{ ...btnStyle, position: 'absolute', left: 893, top: 260 }}>
+      <Link to="/spotlights" aria-label="read more about it! (my mobile morning productivity app)" style={{ ...btnStyle, position: 'absolute', left: 893, top: 260 }}>
         read more about it!
       </Link>
       <a href="https://www.youtube.com/watch?v=GAFjmWF82tA" target="_blank" rel="noreferrer" style={{ ...btnStyle, position: 'absolute', left: 894, top: 420, width: 357 }}>

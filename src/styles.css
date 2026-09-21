@@ -18,6 +18,23 @@ a:hover {
   font-style: italic;
 }
 
+/* Keyboard focus ring, shared by every link/button/control. Two bands so it reads on any
+   background: a cream inner band (contrasts with the maroon/steel areas) and a steel outer
+   outline (contrasts with the cream/lavender/orange/rose areas). box-shadow and outline both
+   follow border-radius; :focus-visible keeps it off mouse clicks. */
+:focus-visible {
+  outline: 3px solid #1e3f55;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px #f5d7cc;
+}
+
+/* <main> is only ever focused by script (skip link); it isn't a control, so no ring around
+   the whole page. */
+main:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 .skip-link {
   position: fixed;
   top: -80px;
@@ -34,4 +51,15 @@ a:hover {
 
 .skip-link:focus {
   top: 16px;
+}
+
+/* Study Abroad gallery captions fade in; reduced-motion users get them instantly. */
+.gallery-caption {
+  transition: opacity 0.2s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-caption {
+    transition: none;
+  }
 }

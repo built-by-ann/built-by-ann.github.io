@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { MEDLENS_LIVE_URL, MEDLENS_DEMO_URL, MEDLENS_GITHUB_URL } from '../src/data/medlensLinks'
+import LinkLabel from '../src/LinkLabel'
 
 const CHIPS = ['FastAPI', 'React', 'PostgreSQL', 'Google Gemini']
 
@@ -48,6 +49,7 @@ export default function MedlensFeature() {
 
   return (
     <section
+      aria-labelledby="medlens-feature-title"
       style={{
         backgroundColor: '#f0c3e9',
         height: 660,
@@ -74,6 +76,7 @@ export default function MedlensFeature() {
 
       {/* Title */}
       <h2
+        id="medlens-feature-title"
         style={{
           position: 'absolute',
           left: 188,
@@ -173,7 +176,7 @@ export default function MedlensFeature() {
           onMouseLeave={() => setHoveredLink(null)}
           style={buttonStyle('live', true)}
         >
-          view the live site →
+          <LinkLabel text="view the live site →" />
         </a>
 
         <a
@@ -184,7 +187,7 @@ export default function MedlensFeature() {
           onMouseLeave={() => setHoveredLink(null)}
           style={buttonStyle('demo')}
         >
-          watch the demo →
+          <LinkLabel text="watch the demo →" />
         </a>
 
         <Link
@@ -193,7 +196,7 @@ export default function MedlensFeature() {
           onMouseLeave={() => setHoveredLink(null)}
           style={buttonStyle('page')}
         >
-          more about medlens →
+          <LinkLabel text="more about medlens →" />
         </Link>
 
         <a
@@ -204,7 +207,7 @@ export default function MedlensFeature() {
           onMouseLeave={() => setHoveredLink(null)}
           style={buttonStyle('github')}
         >
-          view on github →
+          <LinkLabel text="view on github →" />
         </a>
       </div>
     </section>

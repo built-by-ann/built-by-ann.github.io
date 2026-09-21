@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { CSSProperties, ReactNode } from 'react'
 import { MEDLENS_LIVE_URL, MEDLENS_DEMO_URL, MEDLENS_GITHUB_URL } from '../data/medlensLinks'
+import { inkMuted, creamMuted, steelMuted, coralOnCreamSmall } from '../colors'
+import LinkLabel from '../LinkLabel'
 
 interface GalleryItem {
   src: string
@@ -85,7 +87,7 @@ function eyebrow(light: boolean): CSSProperties {
     fontSize: 12,
     letterSpacing: '0.18em',
     textTransform: 'uppercase',
-    color: light ? 'rgba(245,215,204,0.5)' : 'rgba(73,0,19,0.45)',
+    color: light ? creamMuted : inkMuted,
     marginBottom: 20,
   }
 }
@@ -142,6 +144,15 @@ function Badge({ children, border }: { children: ReactNode; border: string }) {
 // Full-size viewer for the screenshot and figure grids — click an image to open it, arrow keys
 // or the on-screen arrows move through the rest of that group, escape or the backdrop closes it.
 function Lightbox({ items, index, onClose, onStep }: { items: GalleryItem[]; index: number; onClose: () => void; onStep: (dir: -1 | 1) => void }) {
+  const closeRef = useRef<HTMLButtonElement>(null)
+
+  // Move focus into the dialog on open and hand it back to the trigger on close.
+  useEffect(() => {
+    const trigger = document.activeElement as HTMLElement | null
+    closeRef.current?.focus()
+    return () => trigger?.focus()
+  }, [])
+
   useEffect(() => {
     document.body.style.overflow = 'hidden'
     const onKey = (e: KeyboardEvent) => {
@@ -178,7 +189,6 @@ function Lightbox({ items, index, onClose, onStep }: { items: GalleryItem[]; ind
       role="dialog"
       aria-modal="true"
       aria-label={current.caption}
-      onClick={onClose}
       style={{
         position: 'fixed',
         inset: 0,
@@ -186,9 +196,20 @@ function Lightbox({ items, index, onClose, onStep }: { items: GalleryItem[]; ind
         zIndex: 1000,
       }}
     >
+      {/* Click-outside-to-close: a real button behind the content, out of the Tab order and the
+          accessibility tree (keyboard users close with Esc or the close button). */}
       <button
         type="button"
-        aria-label="close"
+        tabIndex={-1}
+        aria-hidden="true"
+        onClick={onClose}
+        style={{ position: 'absolute', inset: 0, background: 'none', border: 'none', padding: 0, cursor: 'default' }}
+      />
+
+      <button
+        type="button"
+        ref={closeRef}
+        aria-label="close image viewer"
         onClick={onClose}
         style={{
           position: 'absolute',
@@ -211,8 +232,8 @@ function Lightbox({ items, index, onClose, onStep }: { items: GalleryItem[]; ind
       {items.length > 1 && (
         <button
           type="button"
-          aria-label="previous"
-          onClick={e => { e.stopPropagation(); onStep(-1) }}
+          aria-label="previous image"
+          onClick={() => onStep(-1)}
           style={{ ...arrowStyle, left: 24 }}
           onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
           onMouseLeave={e => (e.currentTarget.style.opacity = '0.7')}
@@ -223,21 +244,20 @@ function Lightbox({ items, index, onClose, onStep }: { items: GalleryItem[]; ind
 
       {/* Explicit inset box (not vw/vh — this site applies a CSS zoom on <html> that scales
           viewport units unpredictably) so the image can size itself unambiguously via percentages. */}
-      <div style={{ position: 'absolute', top: 90, left: 130, right: 130, bottom: 108, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ position: 'absolute', top: 90, left: 130, right: 130, bottom: 108, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
         <img
           src={current.src}
-          alt={current.caption}
-          onClick={e => e.stopPropagation()}
-          style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', objectFit: 'contain', border: `1.5px solid ${cream}` }}
+          alt=""
+          style={{ pointerEvents: 'auto', maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', objectFit: 'contain', border: `1.5px solid ${cream}` }}
         />
       </div>
 
-      <div style={{ position: 'absolute', bottom: 24, left: 0, right: 0, textAlign: 'center' }}>
+      <div style={{ position: 'absolute', bottom: 24, left: 0, right: 0, textAlign: 'center', pointerEvents: 'none' }}>
         <p style={{ fontFamily: "'Roboto', sans-serif", fontStyle: 'italic', fontSize: 18, color: cream, margin: 0, marginBottom: 8 }}>
           {current.caption}
         </p>
         {items.length > 1 && (
-          <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: 12, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(245,215,204,0.5)' }}>
+          <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: 12, letterSpacing: '0.15em', textTransform: 'uppercase', color: creamMuted }}>
             {index + 1} / {items.length}
           </div>
         )}
@@ -246,8 +266,8 @@ function Lightbox({ items, index, onClose, onStep }: { items: GalleryItem[]; ind
       {items.length > 1 && (
         <button
           type="button"
-          aria-label="next"
-          onClick={e => { e.stopPropagation(); onStep(1) }}
+          aria-label="next image"
+          onClick={() => onStep(1)}
           style={{ ...arrowStyle, right: 24 }}
           onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
           onMouseLeave={e => (e.currentTarget.style.opacity = '0.7')}
@@ -312,7 +332,7 @@ export default function MedlensPage() {
             onMouseLeave={() => setHoveredLink(null)}
             style={buttonStyle('live', true, lavender, ink)}
           >
-            view the live site →
+            <LinkLabel text="view the live site →" />
           </a>
           <a
             href={MEDLENS_DEMO_URL}
@@ -322,7 +342,7 @@ export default function MedlensPage() {
             onMouseLeave={() => setHoveredLink(null)}
             style={buttonStyle('demo', false, lavender, ink)}
           >
-            watch the demo →
+            <LinkLabel text="watch the demo →" />
           </a>
           <a
             href={MEDLENS_GITHUB_URL}
@@ -332,7 +352,7 @@ export default function MedlensPage() {
             onMouseLeave={() => setHoveredLink(null)}
             style={buttonStyle('github', false, lavender, ink)}
           >
-            view on github →
+            <LinkLabel text="view on github →" />
           </a>
         </div>
 
@@ -410,7 +430,7 @@ export default function MedlensPage() {
           ))}
         </div>
 
-        <p style={{ ...body(steel, 15), marginTop: 40, opacity: 0.75, maxWidth: 700 }}>
+        <p style={{ ...body(steelMuted, 15), marginTop: 40, maxWidth: 700 }}>
           the llm's role is limited to step 3: extraction. every comparison against the medication
           list is handled by deterministic application logic, not the model.
         </p>
@@ -427,6 +447,7 @@ export default function MedlensPage() {
             <button
               type="button"
               key={shot.src}
+              aria-label={`view ${shot.caption} full size`}
               onClick={() => openLightbox(SHOTS, i)}
               style={{
                 position: 'relative',
@@ -444,11 +465,12 @@ export default function MedlensPage() {
             >
               <img
                 src={shot.src}
-                alt={shot.caption}
+                alt=""
                 style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }}
               />
 
               <div
+                aria-hidden="true"
                 style={{
                   position: 'absolute',
                   inset: 0,
@@ -580,7 +602,7 @@ export default function MedlensPage() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginBottom: 40 }}>
           {EVAL_CARDS.map(card => (
             <div key={card.model} style={{ border: `1.5px solid ${ink}`, padding: '32px 28px' }}>
-              <div style={{ fontFamily: "'Roboto', sans-serif", fontWeight: 700, fontSize: 13, letterSpacing: '0.12em', textTransform: 'uppercase', color: coral, marginBottom: 20 }}>
+              <div style={{ fontFamily: "'Roboto', sans-serif", fontWeight: 700, fontSize: 13, letterSpacing: '0.12em', textTransform: 'uppercase', color: coralOnCreamSmall, marginBottom: 20 }}>
                 {card.model}
               </div>
               <div style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: 48, color: ink, lineHeight: 1, marginBottom: 8 }}>
@@ -589,7 +611,7 @@ export default function MedlensPage() {
               <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: 14, color: steel, marginBottom: 14 }}>
                 {card.statLabel}
               </div>
-              <div style={{ fontFamily: "'Roboto', sans-serif", fontStyle: 'italic', fontSize: 14, color: steel, opacity: 0.75, lineHeight: 1.5 }}>
+              <div style={{ fontFamily: "'Roboto', sans-serif", fontStyle: 'italic', fontSize: 14, color: steelMuted, lineHeight: 1.5 }}>
                 {card.sub}
               </div>
             </div>
@@ -601,19 +623,20 @@ export default function MedlensPage() {
             <div key={fig.src}>
               <button
                 type="button"
+                aria-label={`view ${fig.caption} chart full size`}
                 onClick={() => openLightbox(FIGURES, i)}
                 style={{ border: `1.5px solid ${ink}`, marginBottom: 14, padding: 0, background: 'none', cursor: 'pointer', display: 'block', width: '100%' }}
               >
                 <img src={fig.src} alt={fig.caption} style={{ width: '100%', display: 'block' }} />
               </button>
-              <div style={{ fontFamily: "'Roboto', sans-serif", fontWeight: 700, fontSize: 14, color: steel, opacity: 0.7 }}>
+              <div style={{ fontFamily: "'Roboto', sans-serif", fontWeight: 700, fontSize: 14, color: steelMuted }}>
                 {fig.caption}
               </div>
             </div>
           ))}
         </div>
 
-        <p style={{ ...body(steel, 15), opacity: 0.8, maxWidth: 780 }}>
+        <p style={{ ...body(steelMuted, 15), maxWidth: 780 }}>
           this benchmark evaluates medication extraction only, not reconciliation or general
           clinical reasoning. openbiollm's result reflects performance under this standardized
           protocol only, not proof that the model is universally incapable of medication
@@ -653,7 +676,7 @@ export default function MedlensPage() {
             onMouseLeave={() => setHoveredLink(null)}
             style={buttonStyle('closing-live', true, cream, ink)}
           >
-            launch medlens →
+            <LinkLabel text="launch medlens →" />
           </a>
           <a
             href={MEDLENS_DEMO_URL}
@@ -663,7 +686,7 @@ export default function MedlensPage() {
             onMouseLeave={() => setHoveredLink(null)}
             style={buttonStyle('closing-demo', false, cream, ink)}
           >
-            watch the demo →
+            <LinkLabel text="watch the demo →" />
           </a>
           <a
             href={MEDLENS_GITHUB_URL}
@@ -673,11 +696,11 @@ export default function MedlensPage() {
             onMouseLeave={() => setHoveredLink(null)}
             style={buttonStyle('closing-github', false, cream, ink)}
           >
-            view the code →
+            <LinkLabel text="view the code →" />
           </a>
         </div>
 
-        <p style={{ fontFamily: "'Roboto', sans-serif", fontStyle: 'italic', fontSize: 13, color: ink, opacity: 0.5, lineHeight: 1.6, maxWidth: 640, marginTop: 16 }}>
+        <p style={{ fontFamily: "'Roboto', sans-serif", fontStyle: 'italic', fontSize: 13, color: inkMuted, lineHeight: 1.6, maxWidth: 640, marginTop: 16 }}>
           medlens uses synthetic clinical data only and is an educational software engineering
           portfolio project. it is not intended for clinical use.
         </p>

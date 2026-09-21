@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import type { CSSProperties } from 'react'
+import { inkMuted, creamMuted } from '../colors'
+import LinkLabel from '../LinkLabel'
 
 const courses = [
   {
@@ -41,7 +43,12 @@ const galleryPhotos = [
 
 
 export default function StudyAbroadPage() {
+  // A caption shows while its photo is hovered, focused, or pinned by a click/tap, unless it was
+  // dismissed with Esc (WCAG 1.4.13: dismissible, hoverable, persistent).
   const [hoveredPhoto, setHoveredPhoto] = useState<number | null>(null)
+  const [focusedPhoto, setFocusedPhoto] = useState<number | null>(null)
+  const [pinnedPhoto, setPinnedPhoto] = useState<number | null>(null)
+  const [dismissedPhoto, setDismissedPhoto] = useState<number | null>(null)
 
   const sectionLabel = (text: string, light = true): CSSProperties => ({
     fontFamily: "'Roboto', sans-serif",
@@ -49,7 +56,7 @@ export default function StudyAbroadPage() {
     fontSize: 12,
     letterSpacing: '0.18em',
     textTransform: 'uppercase',
-    color: light ? 'rgba(245,215,204,0.5)' : 'rgba(73,0,19,0.45)',
+    color: light ? creamMuted : inkMuted,
     marginBottom: 20,
   })
 
@@ -157,7 +164,7 @@ export default function StudyAbroadPage() {
           <div style={{ flex: 2, display: 'flex', flexDirection: 'column', gap: 16 }}>
             <img
               src="/files/siena_main.png"
-              alt="Siena"
+              alt="Siena's hillside skyline at dusk, with the striped cathedral tower above terracotta rooftops"
               style={{ width: '100%', aspectRatio: '3/4', objectFit: 'cover', display: 'block' }}
             />
           </div>
@@ -280,9 +287,9 @@ export default function StudyAbroadPage() {
           </p>
 
           <div style={{ flex: 2, display: 'flex', flexDirection: 'column', gap: 16 }}>
-            <img src="/files/lhp.jpg" alt="" style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block' }} />
-            <img src="/files/lhp1.jpg" alt="" style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block' }} />
-            <img src="/files/lhp2.jpg" alt="" style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block' }} />
+            <img src="/files/lhp.jpg" alt="inside siena's cathedral, with black-and-white striped marble columns and a gold-starred ceiling" style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block' }} />
+            <img src="/files/lhp1.jpg" alt="a tall brick bell tower rising above the rooftops of siena's old town" style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block' }} />
+            <img src="/files/lhp2.jpg" alt="medieval stone palazzos around a siena piazza, with a statue in the foreground" style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block' }} />
           </div>
         </div>
       </div>
@@ -296,7 +303,7 @@ export default function StudyAbroadPage() {
             fontSize: 12,
             letterSpacing: '0.18em',
             textTransform: 'uppercase',
-            color: 'rgba(245,215,204,0.45)',
+            color: creamMuted,
             marginBottom: 20,
           }}
         >
@@ -351,7 +358,7 @@ export default function StudyAbroadPage() {
             textDecoration: 'none',
           }}
         >
-          read the full article →
+          <LinkLabel text="read the full article →" />
         </a>
       </div>
 
@@ -382,7 +389,7 @@ export default function StudyAbroadPage() {
             marginBottom: 56,
           }}
         >
-          hover over a photo to see italy through my eyes
+          hover over or tap a photo to see italy through my eyes
         </p>
 
         <div
@@ -392,18 +399,31 @@ export default function StudyAbroadPage() {
             gap: 12,
           }}
         >
-          {galleryPhotos.map((photo, i) => (
-            <div
+          {galleryPhotos.map((photo, i) => {
+            const captionShown = (hoveredPhoto === i || focusedPhoto === i || pinnedPhoto === i) && dismissedPhoto !== i
+            return (
+            <button
+              type="button"
               key={photo.id}
+              aria-label={photo.src ? undefined : photo.caption}
               style={{
                 position: 'relative',
+                display: 'block',
+                width: '100%',
+                padding: 0,
+                border: 'none',
+                font: 'inherit',
                 aspectRatio: '1',
                 overflow: 'hidden',
                 cursor: 'pointer',
                 backgroundColor: 'rgba(190,120,128,0.2)',
               }}
-              onMouseEnter={() => setHoveredPhoto(i)}
-              onMouseLeave={() => setHoveredPhoto(null)}
+              onClick={() => { setPinnedPhoto(pinnedPhoto === i ? null : i); setDismissedPhoto(null) }}
+              onMouseEnter={() => { setHoveredPhoto(i); setDismissedPhoto(null) }}
+              onMouseLeave={() => { setHoveredPhoto(null); setDismissedPhoto(null) }}
+              onFocus={() => { setFocusedPhoto(i); setDismissedPhoto(null) }}
+              onBlur={() => { setFocusedPhoto(null); setPinnedPhoto(null); setDismissedPhoto(null) }}
+              onKeyDown={e => { if (e.key === 'Escape' && captionShown) { setDismissedPhoto(i); setPinnedPhoto(null) } }}
             >
               {photo.src ? (
                 <img
@@ -412,7 +432,7 @@ export default function StudyAbroadPage() {
                   style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                 />
               ) : (
-                <div
+                <span
                   style={{
                     width: '100%',
                     height: '100%',
@@ -433,16 +453,18 @@ export default function StudyAbroadPage() {
                       fontSize: 12,
                       letterSpacing: '0.12em',
                       textTransform: 'uppercase',
-                      color: 'rgba(245,215,204,0.25)',
+                      color: creamMuted,
                     }}
                   >
                     photo
                   </span>
-                </div>
+                </span>
               )}
 
-              {/* Hover overlay */}
-              <div
+              {/* Caption overlay (hover, focus, or tap) */}
+              <span
+                aria-hidden="true"
+                className="gallery-caption"
                 style={{
                   position: 'absolute',
                   inset: 0,
@@ -451,11 +473,10 @@ export default function StudyAbroadPage() {
                   alignItems: 'center',
                   justifyContent: 'center',
                   padding: 20,
-                  opacity: hoveredPhoto === i ? 1 : 0,
-                  transition: 'opacity 0.2s ease',
+                  opacity: captionShown ? 1 : 0,
                 }}
               >
-                <p
+                <span
                   style={{
                     fontFamily: "'Roboto', sans-serif",
                     fontStyle: 'italic',
@@ -467,10 +488,11 @@ export default function StudyAbroadPage() {
                   }}
                 >
                   {photo.caption}
-                </p>
-              </div>
-            </div>
-          ))}
+                </span>
+              </span>
+            </button>
+            )
+          })}
         </div>
       </div>
 

@@ -1,32 +1,39 @@
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { roseMid } from '../src/colors'
 
 export default function Navbar() {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null)
 
   const navLink = (to: string) => ({ isActive }: { isActive: boolean }) => ({
     fontFamily: "'Roboto', sans-serif" as const,
-    fontWeight: isActive ? 700 : 500,
+    fontWeight: 700,
     fontStyle: (isActive || hoveredLink === to) ? 'italic' as const : 'normal' as const,
-    fontSize: 16,
+    fontSize: 19,
     color: (isActive || hoveredLink === to) ? '#490013' : '#f5d7cc',
     textDecoration: 'none' as const,
     whiteSpace: 'nowrap' as const,
   })
 
   return (
+    <header>
     <nav
       style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        backgroundColor: '#be7880',
+        backgroundColor: roseMid,
         height: 95,
         padding: '0 189px',
         width: '100%',
       }}
     >
-      <Link to="/" style={{ fontFamily: "'Roboto', sans-serif", fontWeight: 700, fontSize: 20, color: '#f5d7cc', textDecoration: 'none', whiteSpace: 'nowrap' }}>
+      <Link
+        to="/"
+        style={{ fontFamily: "'Roboto', sans-serif", fontWeight: 700, fontSize: 20, color: hoveredLink === 'logo' ? '#490013' : '#f5d7cc', textDecoration: 'none', whiteSpace: 'nowrap' }}
+        onMouseEnter={() => setHoveredLink('logo')}
+        onMouseLeave={() => setHoveredLink(null)}
+      >
         built-by-ann
       </Link>
       <div style={{ display: 'flex', gap: 32, alignItems: 'center' }}>
@@ -38,9 +45,9 @@ export default function Navbar() {
           rel="noreferrer"
           style={{
             fontFamily: "'Roboto', sans-serif",
-            fontWeight: hoveredLink === 'github' ? 500 : 500,
+            fontWeight: 700,
             fontStyle: hoveredLink === 'github' ? 'italic' : 'normal',
-            fontSize: 16,
+            fontSize: 19,
             color: hoveredLink === 'github' ? '#490013' : '#f5d7cc',
             textDecoration: 'none',
             whiteSpace: 'nowrap',
@@ -54,8 +61,9 @@ export default function Navbar() {
         <NavLink to="/projects" style={navLink('/projects')} onMouseEnter={() => setHoveredLink('/projects')} onMouseLeave={() => setHoveredLink(null)}>projects</NavLink>
         <NavLink to="/medlens" style={navLink('/medlens')} onMouseEnter={() => setHoveredLink('/medlens')} onMouseLeave={() => setHoveredLink(null)}>medlens</NavLink>
         <NavLink to="/study-abroad" style={navLink('/study-abroad')} onMouseEnter={() => setHoveredLink('/study-abroad')} onMouseLeave={() => setHoveredLink(null)}>study abroad</NavLink>
-        <NavLink to="/contact" style={({ isActive }) => ({ ...navLink('/contact')({ isActive }), fontWeight: 700 })} onMouseEnter={() => setHoveredLink('/contact')} onMouseLeave={() => setHoveredLink(null)}>contact me</NavLink>
+        <NavLink to="/contact" style={navLink('/contact')} onMouseEnter={() => setHoveredLink('/contact')} onMouseLeave={() => setHoveredLink(null)}>contact me</NavLink>
       </div>
     </nav>
+    </header>
   )
 }

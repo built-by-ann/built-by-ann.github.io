@@ -104,7 +104,32 @@ built-by-ann.github.io/
 ```bash
 npm install
 npm run dev       # starts dev server at localhost:5173
+npm run lint      # ESLint, including accessibility rules
+npm run test:a11y # axe accessibility tests on every route (needs a one-time `npx playwright install chromium`)
 ```
+
+### Accessibility linting
+
+`npm run lint` runs ESLint with the recommended rules from [`eslint-plugin-jsx-a11y`](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y) (see `eslint.config.js`). It catches common static JSX problems such as missing `alt` text, click handlers on non-interactive elements, and empty links; React Router's `<Link>`/`<NavLink>` are linted as anchors. Please fix violations rather than disabling rules.
+
+Linting does not replace manual testing. It can't check keyboard navigation, focus order or visibility, color contrast, route-change focus behavior, or what a screen reader actually announces, so test those in the browser and with VoiceOver/NVDA.
+
+### Accessibility testing
+
+Automated checks run [axe-core](https://github.com/dequelabs/axe-core) (via [`@axe-core/playwright`](https://github.com/dequelabs/axe-core-npm)) in a real Chromium browser against the production build, using axe's default rules with nothing disabled. Tests live in `e2e/a11y.spec.ts`:
+
+- **Every route** declared in `src/App.tsx` is read from the source and tested, so a new route is covered automatically. Currently: `/`, `/resume`, `/projects`, `/spotlights`, `/study-abroad`, `/contact`, `/about`, `/medlens`.
+- **Interactive states:** `/projects` with a project expanded, and `/medlens` with the image viewer open.
+
+```bash
+npx playwright install chromium   # once
+npm run test:a11y                 # accessibility tests only
+npm test                          # every Playwright test (currently the same suite)
+```
+
+GitHub Actions (`.github/workflows/ci.yml`) runs lint, build, and the accessibility tests on every push to `main` and every pull request, and a violation fails the job. A failing test prints each violation's axe rule, impact, and the element selector; fix the markup rather than excluding the rule.
+
+Passing axe does not mean the site is accessible. Automated tools catch only a portion of WCAG issues, so keep testing by hand: keyboard interaction, focus order and visibility, route-change focus behavior, screen-reader usability (VoiceOver/NVDA), reflow and zoom, and contrast or meaning that depends on context.
 
 ## Deployment
 

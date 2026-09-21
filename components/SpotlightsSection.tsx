@@ -1,4 +1,6 @@
 import type { CSSProperties } from 'react'
+import { inkMuted } from '../src/colors'
+import { linkName } from '../src/LinkLabel'
 
 interface Spotlight {
   num: string
@@ -67,8 +69,9 @@ function SpotlightCard({ s }: { s: Spotlight }) {
   }
 
   return (
-    <div
+    <article
       id={s.id}
+      aria-labelledby={`${s.id}-title`}
       style={{ backgroundColor: s.bg, padding: '96px 188px' }}
     >
       {/* Label */}
@@ -79,8 +82,7 @@ function SpotlightCard({ s }: { s: Spotlight }) {
           fontSize: 13,
           letterSpacing: '0.15em',
           textTransform: 'uppercase',
-          color: ink,
-          opacity: 0.5,
+          color: inkMuted,
           marginBottom: 20,
         }}
       >
@@ -89,6 +91,7 @@ function SpotlightCard({ s }: { s: Spotlight }) {
 
       {/* Title */}
       <h2
+        id={`${s.id}-title`}
         style={{
           fontFamily: "'Outfit', sans-serif",
           fontWeight: 700,
@@ -108,10 +111,9 @@ function SpotlightCard({ s }: { s: Spotlight }) {
           fontFamily: "'Roboto', sans-serif",
           fontStyle: 'italic',
           fontSize: 22,
-          color: ink,
+          color: inkMuted,
           margin: 0,
           marginBottom: 56,
-          opacity: 0.65,
         }}
       >
         {s.tagline}
@@ -145,8 +147,7 @@ function SpotlightCard({ s }: { s: Spotlight }) {
               fontSize: 11,
               letterSpacing: '0.15em',
               textTransform: 'uppercase',
-              color: ink,
-              opacity: 0.45,
+              color: inkMuted,
               marginBottom: 18,
             }}
           >
@@ -163,6 +164,7 @@ function SpotlightCard({ s }: { s: Spotlight }) {
       {/* GitHub button */}
       <a
         href={s.github}
+        aria-label={linkName(s.label ?? 'view on github →', s.title)}
         target="_blank"
         rel="noreferrer"
         style={{
@@ -178,16 +180,16 @@ function SpotlightCard({ s }: { s: Spotlight }) {
       >
         {s.label ?? 'view on github →'}
       </a>
-    </div>
+    </article>
   )
 }
 
 export default function SpotlightsSection() {
   return (
-    <section>
+    <div>
       {spotlights.map((s) => (
         <SpotlightCard key={s.num} s={s} />
       ))}
-    </section>
+    </div>
   )
 }
