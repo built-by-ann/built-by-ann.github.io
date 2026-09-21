@@ -11,6 +11,20 @@ import ContactPage from './pages/ContactPage'
 import AboutPage from './pages/AboutPage'
 import MedlensPage from './pages/MedlensPage'
 
+function SkipLink() {
+  // Native anchor navigation to a tabIndex={-1} target already moves focus in most
+  // evergreen browsers, but this backstops that explicitly so it's reliable everywhere.
+  const focusMain = () => {
+    document.getElementById('main-content')?.focus()
+  }
+
+  return (
+    <a href="#main-content" className="skip-link" onClick={focusMain}>
+      skip to main content
+    </a>
+  )
+}
+
 function ScrollToTop() {
   const { pathname, hash } = useLocation()
   useEffect(() => {
@@ -30,18 +44,21 @@ export default function App() {
   return (
     <BrowserRouter>
       <div style={{ width: 1440, backgroundColor: '#490013' }}>
+        <SkipLink />
         <ScrollToTop />
         <Navbar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/resume" element={<ResumePage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/spotlights" element={<SpotlightsPage />} />
-          <Route path="/study-abroad" element={<StudyAbroadPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/medlens" element={<MedlensPage />} />
-        </Routes>
+        <main id="main-content" tabIndex={-1}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/resume" element={<ResumePage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/spotlights" element={<SpotlightsPage />} />
+            <Route path="/study-abroad" element={<StudyAbroadPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/medlens" element={<MedlensPage />} />
+          </Routes>
+        </main>
         <Footer />
       </div>
     </BrowserRouter>

@@ -384,28 +384,24 @@ export default function MedlensPage() {
         <Eyebrow light={false}>02 · how it works</Eyebrow>
         <h2 style={{ ...heading(56, ink), marginBottom: 56 }}>from documents to reconciled data</h2>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-          {[STEPS.slice(0, 2), STEPS.slice(2, 4), STEPS.slice(4, 6)].map((row, i) => (
-            <div key={i}>
-              <div style={{ display: 'flex', gap: 40 }}>
-                {row.map(step => (
-                  <div key={step.num} style={{ flex: 1, display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-                    <Badge border={ink}>{step.num}</Badge>
-                    <div>
-                      <div style={{ fontFamily: "'Roboto', sans-serif", fontWeight: 700, fontSize: 18, color: ink, marginBottom: 4 }}>
-                        {step.title}
-                      </div>
-                      <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: 15, lineHeight: 1.5, color: steel }}>
-                        {step.copy}
-                      </div>
-                    </div>
+        <div style={{ display: 'flex', flexDirection: 'column', maxWidth: 760 }}>
+          {STEPS.map((step, i) => (
+            <div key={step.num}>
+              <div style={{ display: 'flex', gap: 20, alignItems: 'flex-start' }}>
+                <Badge border={ink}>{step.num}</Badge>
+                <div style={{ paddingTop: 6 }}>
+                  <div style={{ fontFamily: "'Roboto', sans-serif", fontWeight: 700, fontSize: 18, lineHeight: 1.3, color: ink, marginBottom: 6 }}>
+                    {step.title}
                   </div>
-                ))}
+                  <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: 15, lineHeight: 1.5, color: steel }}>
+                    {step.copy}
+                  </div>
+                </div>
               </div>
-              {i < 2 && (
+              {i < STEPS.length - 1 && (
                 <div
                   aria-hidden="true"
-                  style={{ fontFamily: "'Outfit', sans-serif", fontSize: 20, color: 'rgba(73,0,19,0.3)', margin: '16px 0 0 20px' }}
+                  style={{ width: 40, textAlign: 'center', fontFamily: "'Outfit', sans-serif", fontSize: 20, lineHeight: 1, color: 'rgba(73,0,19,0.35)', margin: '12px 0' }}
                 >
                   ↓
                 </div>

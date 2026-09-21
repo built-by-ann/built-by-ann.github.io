@@ -17,3 +17,21 @@ a {
 a:hover {
   font-style: italic;
 }
+
+.skip-link {
+  position: fixed;
+  top: -80px;
+  left: 16px;
+  z-index: 1000;
+  background-color: #1e3f55;
+  color: #f5d7cc;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 14px 32px;
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
