@@ -1,6 +1,8 @@
 import type { CSSProperties } from 'react'
 import { inkMuted } from '../src/colors'
 import { linkName } from '../src/LinkLabel'
+import ExternalLink from '../src/ExternalLink'
+import { fluid } from '../src/fluid'
 
 interface Spotlight {
   num: string
@@ -72,7 +74,7 @@ function SpotlightCard({ s }: { s: Spotlight }) {
     <article
       id={s.id}
       aria-labelledby={`${s.id}-title`}
-      style={{ backgroundColor: s.bg, padding: '96px 188px' }}
+      style={{ backgroundColor: s.bg, padding: 'var(--section-y) var(--gutter)' }}
     >
       {/* Label */}
       <div
@@ -95,7 +97,7 @@ function SpotlightCard({ s }: { s: Spotlight }) {
         style={{
           fontFamily: "'Outfit', sans-serif",
           fontWeight: 700,
-          fontSize: 72,
+          fontSize: fluid(72),
           color: ink,
           lineHeight: 1,
           margin: 0,
@@ -120,8 +122,8 @@ function SpotlightCard({ s }: { s: Spotlight }) {
       </p>
 
       {/* 2-col: description + skills */}
-      <div style={{ display: 'flex', gap: 96, marginBottom: 52, alignItems: 'flex-start' }}>
-        <div style={{ flex: 3, display: 'flex', flexDirection: 'column', gap: 20 }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(40px, 7vw, 96px)', marginBottom: 52, alignItems: 'flex-start' }}>
+        <div style={{ flex: '3 1 340px', display: 'flex', flexDirection: 'column', gap: 20 }}>
           {s.description.split('\n\n').map((para, i) => (
             <p
               key={i}
@@ -139,7 +141,7 @@ function SpotlightCard({ s }: { s: Spotlight }) {
           ))}
         </div>
 
-        <div style={{ flex: 2 }}>
+        <div style={{ flex: '2 1 260px' }}>
           <div
             style={{
               fontFamily: "'Roboto', sans-serif",
@@ -162,11 +164,9 @@ function SpotlightCard({ s }: { s: Spotlight }) {
       </div>
 
       {/* GitHub button */}
-      <a
+      <ExternalLink
         href={s.github}
         aria-label={linkName(s.label ?? 'view on github →', s.title)}
-        target="_blank"
-        rel="noreferrer"
         style={{
           display: 'inline-block',
           backgroundColor: ink,
@@ -179,7 +179,7 @@ function SpotlightCard({ s }: { s: Spotlight }) {
         }}
       >
         {s.label ?? 'view on github →'}
-      </a>
+      </ExternalLink>
     </article>
   )
 }

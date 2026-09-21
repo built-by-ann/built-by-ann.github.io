@@ -1,13 +1,18 @@
 import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
+import ExternalLink from '../src/ExternalLink'
+import { fluid } from '../src/fluid'
 
 const annPhoto = '/files/ann-photo.png'
 const maskSvg = '/files/hero-mask.svg'
 
 export default function Hero() {
   const btnStyle: CSSProperties = {
-    width: 474,
-    height: 86,
+    flex: '1 1 260px',
+    maxWidth: 474,
+    minHeight: 86,
+    padding: '16px 24px',
+    textAlign: 'center',
     backgroundColor: '#1e3f55',
     color: '#f5d7cc',
     fontFamily: "'Roboto', sans-serif",
@@ -23,18 +28,20 @@ export default function Hero() {
     <div
       style={{
         backgroundColor: '#490013',
-        height: 846,
-        position: 'relative',
-        overflow: 'hidden',
+        padding: 'clamp(40px, 7vw, 80px) var(--gutter) clamp(48px, 7vw, 86px)',
+        display: 'flex',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        gap: 'clamp(32px, 5vw, 56px) clamp(32px, 6vw, 68px)',
       }}
     >
       {/* Hero text */}
-      <div style={{ position: 'absolute', left: 188, top: 109, width: 463 }}>
+      <div style={{ flex: '1 1 340px', maxWidth: 463 }}>
         <h1
           style={{
             fontFamily: "'Outfit', sans-serif",
             fontWeight: 700,
-            fontSize: 68,
+            fontSize: fluid(68),
             color: '#f5d7cc',
             lineHeight: 1,
             marginBottom: 20,
@@ -69,25 +76,30 @@ export default function Hero() {
         </p>
       </div>
 
-      {/* Ann's photo with SVG mask */}
-      {/* Link wraps the masked photo (not the other way round) so the focus ring isn't clipped by the mask */}
+      {/* Ann's photo with SVG mask. The link wraps the masked photo (not the other way round) so the
+          focus ring isn't clipped by the mask. The link box is cropped to the mask's circle
+          (525 of the original 544x725 photo box), and the mask is sized in percentages so the
+          whole thing scales with the available width. */}
       <Link
         to="/about"
         aria-label="learn more about ann mathew"
-        style={{ position: 'absolute', left: 719, top: 26, width: 544, height: 725, display: 'block' }}
+        style={{ flex: '1 1 300px', maxWidth: 544, aspectRatio: '544 / 525', display: 'block', position: 'relative' }}
       >
         <div
           style={{
+            position: 'absolute',
+            top: '-19.05%',
+            left: 0,
             width: '100%',
-            height: '100%',
+            aspectRatio: '544 / 725',
             maskImage: `url('${maskSvg}')`,
-            maskSize: '525px 525px',
+            maskSize: '96.5% 72.4%',
             maskRepeat: 'no-repeat',
-            maskPosition: '9px 100px',
+            maskPosition: '47.4% 50%',
             WebkitMaskImage: `url('${maskSvg}')`,
-            WebkitMaskSize: '525px 525px',
+            WebkitMaskSize: '96.5% 72.4%',
             WebkitMaskRepeat: 'no-repeat',
-            WebkitMaskPosition: '9px 100px',
+            WebkitMaskPosition: '47.4% 50%',
           } as CSSProperties}
         >
           <img
@@ -99,12 +111,14 @@ export default function Hero() {
       </Link>
 
       {/* CTA buttons */}
-      <a href="https://built-by-ann.github.io/spotlights" target="_blank" rel="noreferrer" style={{ ...btnStyle, position: 'absolute', left: 188, top: 760 }}>
-        check out my projects!
-      </a>
-      <a href="/files/AnnMathew_Resume.pdf" target="_blank" rel="noreferrer" style={{ ...btnStyle, position: 'absolute', left: 777, top: 760 }}>
-        download my resume!
-      </a>
+      <div style={{ flex: '1 0 100%', display: 'flex', flexWrap: 'wrap', gap: '24px clamp(24px, 8vw, 115px)' }}>
+        <Link to="/spotlights" style={btnStyle}>
+          check out my projects!
+        </Link>
+        <ExternalLink href="/files/AnnMathew_Resume.pdf" style={btnStyle}>
+          download my resume!
+        </ExternalLink>
+      </div>
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import SpotlightsSection from '../../components/SpotlightsSection'
+import { fluid } from '../fluid'
 
 export default function SpotlightsPage() {
   return (
@@ -8,15 +9,15 @@ export default function SpotlightsPage() {
           backgroundColor: '#490013',
           paddingTop: 80,
           paddingBottom: 64,
-          paddingLeft: 188,
-          paddingRight: 188,
+          paddingLeft: 'var(--gutter)',
+          paddingRight: 'var(--gutter)',
         }}
       >
         <h1
           style={{
             fontFamily: "'Outfit', sans-serif",
             fontWeight: 700,
-            fontSize: 68,
+            fontSize: fluid(68),
             color: '#f5d7cc',
             lineHeight: 1,
             margin: 0,

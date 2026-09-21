@@ -3,6 +3,8 @@ import type { CSSProperties, ReactNode } from 'react'
 import { MEDLENS_LIVE_URL, MEDLENS_DEMO_URL, MEDLENS_GITHUB_URL } from '../data/medlensLinks'
 import { inkMuted, creamMuted, steelMuted, coralOnCreamSmall } from '../colors'
 import LinkLabel from '../LinkLabel'
+import ExternalLink from '../ExternalLink'
+import { fluid } from '../fluid'
 
 interface GalleryItem {
   src: string
@@ -100,7 +102,7 @@ function heading(size: number, color: string): CSSProperties {
   return {
     fontFamily: "'Outfit', sans-serif",
     fontWeight: 700,
-    fontSize: size,
+    fontSize: size >= 40 ? fluid(size) : size,
     color,
     lineHeight: 1.05,
     margin: 0,
@@ -111,7 +113,7 @@ function body(color: string, size = 20): CSSProperties {
   return {
     fontFamily: "'Roboto', sans-serif",
     fontStyle: 'italic',
-    fontSize: size,
+    fontSize: size >= 40 ? fluid(size) : size,
     color,
     lineHeight: 1.65,
     margin: 0,
@@ -242,9 +244,9 @@ function Lightbox({ items, index, onClose, onStep }: { items: GalleryItem[]; ind
         </button>
       )}
 
-      {/* Explicit inset box (not vw/vh — this site applies a CSS zoom on <html> that scales
-          viewport units unpredictably) so the image can size itself unambiguously via percentages. */}
-      <div style={{ position: 'absolute', top: 90, left: 130, right: 130, bottom: 108, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
+      {/* Explicit inset box so the image can size itself via percentages; the side inset leaves room for
+          the previous/next buttons and shrinks on narrow screens. */}
+      <div style={{ position: 'absolute', top: 90, left: 'clamp(64px, 9vw, 130px)', right: 'clamp(64px, 9vw, 130px)', bottom: 108, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
         <img
           src={current.src}
           alt=""
@@ -304,7 +306,6 @@ export default function MedlensPage() {
       alignItems: 'center',
       justifyContent: 'center',
       textDecoration: 'none',
-      whiteSpace: 'nowrap',
       opacity: primary && active ? 0.85 : 1,
       transition: 'background-color 0.15s ease, color 0.15s ease, opacity 0.15s ease',
     }
@@ -314,7 +315,7 @@ export default function MedlensPage() {
     <div>
 
       {/* ─── HERO ─── */}
-      <div style={{ backgroundColor: lavender, padding: '120px 188px 100px' }}>
+      <div style={{ backgroundColor: lavender, padding: '120px var(--gutter) 100px' }}>
         <Eyebrow light={false}>flagship project</Eyebrow>
         <h1 style={{ ...heading(96, ink), marginBottom: 32 }}>medlens</h1>
         <p style={{ ...body(steel, 26), maxWidth: 780, marginBottom: 48 }}>
@@ -324,36 +325,30 @@ export default function MedlensPage() {
         </p>
 
         <div style={{ display: 'flex', gap: 18, flexWrap: 'wrap', marginBottom: 56 }}>
-          <a
+          <ExternalLink
             href={MEDLENS_LIVE_URL}
-            target="_blank"
-            rel="noreferrer"
             onMouseEnter={() => setHoveredLink('live')}
             onMouseLeave={() => setHoveredLink(null)}
             style={buttonStyle('live', true, lavender, ink)}
           >
             <LinkLabel text="view the live site →" />
-          </a>
-          <a
+          </ExternalLink>
+          <ExternalLink
             href={MEDLENS_DEMO_URL}
-            target="_blank"
-            rel="noreferrer"
             onMouseEnter={() => setHoveredLink('demo')}
             onMouseLeave={() => setHoveredLink(null)}
             style={buttonStyle('demo', false, lavender, ink)}
           >
             <LinkLabel text="watch the demo →" />
-          </a>
-          <a
+          </ExternalLink>
+          <ExternalLink
             href={MEDLENS_GITHUB_URL}
-            target="_blank"
-            rel="noreferrer"
             onMouseEnter={() => setHoveredLink('github')}
             onMouseLeave={() => setHoveredLink(null)}
             style={buttonStyle('github', false, lavender, ink)}
           >
             <LinkLabel text="view on github →" />
-          </a>
+          </ExternalLink>
         </div>
 
         <div style={{ borderTop: '1.5px solid rgba(73,0,19,0.15)', paddingTop: 24 }}>
@@ -379,7 +374,7 @@ export default function MedlensPage() {
       </div>
 
       {/* ─── WHY MEDLENS ─── */}
-      <div style={{ backgroundColor: ink, padding: '96px 188px' }}>
+      <div style={{ backgroundColor: ink, padding: 'var(--section-y) var(--gutter)' }}>
         <Eyebrow light>01 · why medlens</Eyebrow>
         <h2 style={{ ...heading(56, cream), marginBottom: 36, maxWidth: 700 }}>
           medication data lives in too many places
@@ -400,7 +395,7 @@ export default function MedlensPage() {
       </div>
 
       {/* ─── HOW IT WORKS ─── */}
-      <div style={{ backgroundColor: cream, padding: '96px 188px' }}>
+      <div style={{ backgroundColor: cream, padding: 'var(--section-y) var(--gutter)' }}>
         <Eyebrow light={false}>02 · how it works</Eyebrow>
         <h2 style={{ ...heading(56, ink), marginBottom: 56 }}>from documents to reconciled data</h2>
 
@@ -437,12 +432,12 @@ export default function MedlensPage() {
       </div>
 
       {/* ─── PRODUCT ─── */}
-      <div style={{ backgroundColor: steel, padding: '96px 188px' }}>
+      <div style={{ backgroundColor: steel, padding: 'var(--section-y) var(--gutter)' }}>
         <Eyebrow light>03 · product</Eyebrow>
         <h2 style={{ ...heading(56, cream), marginBottom: 56 }}>inside the application</h2>
 
         {/* hover to reveal the caption — same treatment as the photo grid at the bottom of the study abroad page. click to open full-size. */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 32 }}>
           {SHOTS.map((shot, i) => (
             <button
               type="button"
@@ -503,7 +498,7 @@ export default function MedlensPage() {
       </div>
 
       {/* ─── UNDER THE HOOD ─── */}
-      <div style={{ backgroundColor: lavender, padding: '96px 188px' }}>
+      <div style={{ backgroundColor: lavender, padding: 'var(--section-y) var(--gutter)' }}>
         <Eyebrow light={false}>04 · under the hood</Eyebrow>
         <h2 style={{ ...heading(56, ink), marginBottom: 36, maxWidth: 700 }}>how it's built</h2>
         <p style={{ ...body(steel), maxWidth: 780, marginBottom: 64 }}>
@@ -514,11 +509,11 @@ export default function MedlensPage() {
 
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, marginBottom: 32 }}>
           {ARCHITECTURE.map((layer, i) => (
-            <div key={layer} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div key={layer} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: 480 }}>
               <div
                 style={{
                   border: `1.5px solid ${ink}`,
-                  width: 480,
+                  width: '100%',
                   minHeight: 76,
                   padding: '12px 32px',
                   display: 'flex',
@@ -554,7 +549,7 @@ export default function MedlensPage() {
       </div>
 
       {/* ─── WHERE AI FITS ─── */}
-      <div style={{ backgroundColor: ink, padding: '96px 188px' }}>
+      <div style={{ backgroundColor: ink, padding: 'var(--section-y) var(--gutter)' }}>
         <Eyebrow light>05 · where ai fits</Eyebrow>
         <h2 style={{ ...heading(56, cream), marginBottom: 36, maxWidth: 700 }}>one job, done well</h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 820, marginBottom: 40 }}>
@@ -591,7 +586,7 @@ export default function MedlensPage() {
       </div>
 
       {/* ─── MODEL EVALUATION ─── */}
-      <div style={{ backgroundColor: cream, padding: '96px 188px' }}>
+      <div style={{ backgroundColor: cream, padding: 'var(--section-y) var(--gutter)' }}>
         <Eyebrow light={false}>06 · model evaluation</Eyebrow>
         <h2 style={{ ...heading(56, ink), marginBottom: 24 }}>putting the models to the test</h2>
         <p style={{ ...body(steel), maxWidth: 780, marginBottom: 48 }}>
@@ -599,13 +594,13 @@ export default function MedlensPage() {
           using a standardized prompt and evaluation pipeline.
         </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginBottom: 40 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: 24, marginBottom: 40 }}>
           {EVAL_CARDS.map(card => (
             <div key={card.model} style={{ border: `1.5px solid ${ink}`, padding: '32px 28px' }}>
               <div style={{ fontFamily: "'Roboto', sans-serif", fontWeight: 700, fontSize: 13, letterSpacing: '0.12em', textTransform: 'uppercase', color: coralOnCreamSmall, marginBottom: 20 }}>
                 {card.model}
               </div>
-              <div style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: 48, color: ink, lineHeight: 1, marginBottom: 8 }}>
+              <div style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: fluid(48), color: ink, lineHeight: 1, marginBottom: 8 }}>
                 {card.stat}
               </div>
               <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: 14, color: steel, marginBottom: 14 }}>
@@ -618,7 +613,7 @@ export default function MedlensPage() {
           ))}
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginBottom: 40 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: 24, marginBottom: 40 }}>
           {FIGURES.map((fig, i) => (
             <div key={fig.src}>
               <button
@@ -645,11 +640,11 @@ export default function MedlensPage() {
       </div>
 
       {/* ─── ENGINEERING DECISIONS ─── */}
-      <div style={{ backgroundColor: ink, padding: '96px 188px' }}>
+      <div style={{ backgroundColor: ink, padding: 'var(--section-y) var(--gutter)' }}>
         <Eyebrow light>07 · engineering decisions</Eyebrow>
         <h2 style={{ ...heading(56, cream), marginBottom: 56 }}>decisions that shaped the build</h2>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 24 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: 24 }}>
           {DECISIONS.map(d => (
             <div key={d.title} style={{ borderTop: `1.5px solid ${mauve}`, paddingTop: 24 }}>
               <div style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: 18, color: coral, marginBottom: 10, lineHeight: 1.25 }}>
@@ -664,40 +659,34 @@ export default function MedlensPage() {
       </div>
 
       {/* ─── CLOSING ─── */}
-      <div style={{ backgroundColor: cream, padding: '96px 188px' }}>
+      <div style={{ backgroundColor: cream, padding: 'var(--section-y) var(--gutter)' }}>
         <h2 style={{ ...heading(56, ink), marginBottom: 40 }}>explore medlens</h2>
 
         <div style={{ display: 'flex', gap: 18, flexWrap: 'wrap', marginBottom: 40 }}>
-          <a
+          <ExternalLink
             href={MEDLENS_LIVE_URL}
-            target="_blank"
-            rel="noreferrer"
             onMouseEnter={() => setHoveredLink('closing-live')}
             onMouseLeave={() => setHoveredLink(null)}
             style={buttonStyle('closing-live', true, cream, ink)}
           >
             <LinkLabel text="launch medlens →" />
-          </a>
-          <a
+          </ExternalLink>
+          <ExternalLink
             href={MEDLENS_DEMO_URL}
-            target="_blank"
-            rel="noreferrer"
             onMouseEnter={() => setHoveredLink('closing-demo')}
             onMouseLeave={() => setHoveredLink(null)}
             style={buttonStyle('closing-demo', false, cream, ink)}
           >
             <LinkLabel text="watch the demo →" />
-          </a>
-          <a
+          </ExternalLink>
+          <ExternalLink
             href={MEDLENS_GITHUB_URL}
-            target="_blank"
-            rel="noreferrer"
             onMouseEnter={() => setHoveredLink('closing-github')}
             onMouseLeave={() => setHoveredLink(null)}
             style={buttonStyle('closing-github', false, cream, ink)}
           >
             <LinkLabel text="view the code →" />
-          </a>
+          </ExternalLink>
         </div>
 
         <p style={{ fontFamily: "'Roboto', sans-serif", fontStyle: 'italic', fontSize: 13, color: inkMuted, lineHeight: 1.6, maxWidth: 640, marginTop: 16 }}>

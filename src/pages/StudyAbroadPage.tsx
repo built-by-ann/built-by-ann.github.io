@@ -2,6 +2,8 @@ import { useState } from 'react'
 import type { CSSProperties } from 'react'
 import { inkMuted, creamMuted } from '../colors'
 import LinkLabel from '../LinkLabel'
+import ExternalLink from '../ExternalLink'
+import { fluid } from '../fluid'
 
 const courses = [
   {
@@ -70,8 +72,8 @@ export default function StudyAbroadPage() {
           backgroundColor: '#490013',
           paddingTop: 120,
           paddingBottom: 100,
-          paddingLeft: 188,
-          paddingRight: 188,
+          paddingLeft: 'var(--gutter)',
+          paddingRight: 'var(--gutter)',
         }}
       >
         <div style={sectionLabel('spring 2025 · cet siena')}>
@@ -81,7 +83,7 @@ export default function StudyAbroadPage() {
           style={{
             fontFamily: "'Outfit', sans-serif",
             fontWeight: 700,
-            fontSize: 96,
+            fontSize: fluid(96),
             color: '#f0c3e9',
             lineHeight: 1,
             margin: 0,
@@ -109,15 +111,15 @@ export default function StudyAbroadPage() {
       </div>
 
       {/* ─── THE EXPERIENCE ─── */}
-      <div style={{ backgroundColor: '#f5d7cc', padding: '96px 188px' }}>
-        <div style={{ display: 'flex', gap: 80, alignItems: 'center' }}>
-          <div style={{ flex: 3 }}>
+      <div style={{ backgroundColor: '#f5d7cc', padding: 'var(--section-y) var(--gutter)' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(32px, 6vw, 80px)', alignItems: 'center' }}>
+          <div style={{ flex: '3 1 340px' }}>
             <div style={sectionLabel('the experience', false)}>the experience</div>
             <h2
               style={{
                 fontFamily: "'Outfit', sans-serif",
                 fontWeight: 700,
-                fontSize: 56,
+                fontSize: fluid(56),
                 color: '#490013',
                 lineHeight: 1.05,
                 margin: 0,
@@ -161,7 +163,7 @@ export default function StudyAbroadPage() {
             </p>
           </div>
 
-          <div style={{ flex: 2, display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div style={{ flex: '2 1 260px', display: 'flex', flexDirection: 'column', gap: 16 }}>
             <img
               src="/files/siena_main.png"
               alt="Siena's hillside skyline at dusk, with the striped cathedral tower above terracotta rooftops"
@@ -172,13 +174,13 @@ export default function StudyAbroadPage() {
       </div>
 
       {/* ─── COURSEWORK ─── */}
-      <div style={{ backgroundColor: '#490013', padding: '96px 188px' }}>
+      <div style={{ backgroundColor: '#490013', padding: 'var(--section-y) var(--gutter)' }}>
         <div style={sectionLabel('academics')}>academics</div>
         <h2
           style={{
             fontFamily: "'Outfit', sans-serif",
             fontWeight: 700,
-            fontSize: 56,
+            fontSize: fluid(56),
             color: '#f5d7cc',
             lineHeight: 1.05,
             margin: 0,
@@ -191,7 +193,7 @@ export default function StudyAbroadPage() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
             gap: 24,
           }}
         >
@@ -200,7 +202,7 @@ export default function StudyAbroadPage() {
               key={course.title}
               style={{
                 border: '1.5px solid #be7880',
-                padding: '36px 40px',
+                padding: 'clamp(24px, 4vw, 36px) clamp(20px, 4vw, 40px)',
               }}
             >
               <h3
@@ -234,7 +236,7 @@ export default function StudyAbroadPage() {
       </div>
 
       {/* ─── CULTURE & LANGUAGE ─── */}
-      <div style={{ backgroundColor: '#f0c3e9', padding: '96px 188px' }}>
+      <div style={{ backgroundColor: '#f0c3e9', padding: 'var(--section-y) var(--gutter)' }}>
         <div style={sectionLabel('language, history & people', false)}>
           language, history & people
         </div>
@@ -243,7 +245,7 @@ export default function StudyAbroadPage() {
           style={{
             fontFamily: "'Outfit', sans-serif",
             fontWeight: 700,
-            fontSize: 44,
+            fontSize: fluid(44),
             color: '#490013',
             lineHeight: 1.2,
             margin: 0,
@@ -254,10 +256,10 @@ export default function StudyAbroadPage() {
           "the best thing about learning a language is that it teaches you how to listen."
         </p>
 
-        <div style={{ display: 'flex', gap: 80, alignItems: 'flex-start' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(32px, 6vw, 80px)', alignItems: 'flex-start' }}>
           <p
             style={{
-              flex: 3,
+              flex: '3 1 340px',
               fontFamily: "'Roboto', sans-serif",
               fontStyle: 'italic',
               fontSize: 20,
@@ -286,7 +288,7 @@ export default function StudyAbroadPage() {
             on our travels, the barista who always remembered our orders, and everyone else who made my time in europe deeply memorable. 
           </p>
 
-          <div style={{ flex: 2, display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div style={{ flex: '2 1 260px', display: 'flex', flexDirection: 'column', gap: 16 }}>
             <img src="/files/lhp.jpg" alt="inside siena's cathedral, with black-and-white striped marble columns and a gold-starred ceiling" style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block' }} />
             <img src="/files/lhp1.jpg" alt="a tall brick bell tower rising above the rooftops of siena's old town" style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block' }} />
             <img src="/files/lhp2.jpg" alt="medieval stone palazzos around a siena piazza, with a statue in the foreground" style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block' }} />
@@ -295,7 +297,7 @@ export default function StudyAbroadPage() {
       </div>
 
       {/* ─── CORRESPONDENT ─── */}
-      <div style={{ backgroundColor: '#2e4d62', padding: '96px 188px' }}>
+      <div style={{ backgroundColor: '#2e4d62', padding: 'var(--section-y) var(--gutter)' }}>
         <div
           style={{
             fontFamily: "'Roboto', sans-serif",
@@ -313,7 +315,7 @@ export default function StudyAbroadPage() {
           style={{
             fontFamily: "'Outfit', sans-serif",
             fontWeight: 700,
-            fontSize: 56,
+            fontSize: fluid(56),
             color: '#f5d7cc',
             lineHeight: 1.05,
             margin: 0,
@@ -343,10 +345,8 @@ export default function StudyAbroadPage() {
            of the experience. even more special is how those moments ended up being the ones that 
            connected me most deeply to my friendships in the city.
         </p>
-        <a
+        <ExternalLink
           href="https://cetacademicprograms.com/the-art-of-standing-out/"
-          target="_blank"
-          rel="noreferrer"
           style={{
             display: 'inline-block',
             backgroundColor: '#f5d7cc',
@@ -359,17 +359,17 @@ export default function StudyAbroadPage() {
           }}
         >
           <LinkLabel text="read the full article →" />
-        </a>
+        </ExternalLink>
       </div>
 
       {/* ─── GALLERY ─── */}
-      <div style={{ backgroundColor: '#490013', padding: '96px 188px' }}>
+      <div style={{ backgroundColor: '#490013', padding: 'var(--section-y) var(--gutter)' }}>
         <div style={sectionLabel('in pictures')}>in pictures</div>
         <h2
           style={{
             fontFamily: "'Outfit', sans-serif",
             fontWeight: 700,
-            fontSize: 56,
+            fontSize: fluid(56),
             color: '#f5d7cc',
             lineHeight: 1.05,
             margin: 0,
@@ -395,7 +395,7 @@ export default function StudyAbroadPage() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 220px), 1fr))',
             gap: 12,
           }}
         >

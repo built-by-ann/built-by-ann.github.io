@@ -12,14 +12,14 @@ export default [
     },
     settings: {
       'jsx-a11y': {
-        // React Router's <Link>/<NavLink> render <a>, so lint them as anchors.
-        components: { Link: 'a', NavLink: 'a' },
+        // React Router's <Link>/<NavLink> and our <ExternalLink> render <a>, so lint them as anchors.
+        components: { Link: 'a', NavLink: 'a', ExternalLink: 'a' },
       },
     },
     rules: {
       ...jsxA11y.flatConfigs.recommended.rules,
       // Router links use `to` instead of `href`.
-      'jsx-a11y/anchor-is-valid': ['error', { components: ['Link', 'NavLink'], specialLink: ['to'] }],
+      'jsx-a11y/anchor-is-valid': ['error', { components: ['Link', 'NavLink', 'ExternalLink'], specialLink: ['to'] }],
     },
   },
 ]

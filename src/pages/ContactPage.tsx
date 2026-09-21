@@ -1,4 +1,6 @@
 import { creamMuted } from '../colors'
+import ExternalLink from '../ExternalLink'
+import { fluid } from '../fluid'
 
 export default function ContactPage() {
   const label = {
@@ -14,7 +16,7 @@ export default function ContactPage() {
   const value = {
     fontFamily: "'Outfit', sans-serif" as const,
     fontWeight: 700,
-    fontSize: 24,
+    fontSize: 'clamp(17px, 5.5vw, 24px)',
     color: '#f5d7cc',
     textDecoration: 'none',
     lineHeight: 1,
@@ -26,10 +28,10 @@ export default function ContactPage() {
       style={{
         backgroundColor: '#2e4d62',
         minHeight: 'calc(100vh - 190px)',
-        paddingTop: 100,
-        paddingBottom: 100,
-        paddingLeft: 188,
-        paddingRight: 188,
+        paddingTop: 'var(--section-y)',
+        paddingBottom: 'var(--section-y)',
+        paddingLeft: 'var(--gutter)',
+        paddingRight: 'var(--gutter)',
       }}
     >
       {/* Header */}
@@ -51,7 +53,7 @@ export default function ContactPage() {
         style={{
           fontFamily: "'Outfit', sans-serif",
           fontWeight: 700,
-          fontSize: 80,
+          fontSize: fluid(80),
           color: '#f5d7cc',
           lineHeight: 1,
           margin: 0,
@@ -79,7 +81,7 @@ export default function ContactPage() {
       <div style={{ borderBottom: '1.5px solid rgba(245,215,204,0.2)', marginBottom: 64 }} />
 
       {/* Contact grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px 80px', maxWidth: 700 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '48px 80px', maxWidth: 700 }}>
 
         <div>
           <div style={label}>email</div>
@@ -90,23 +92,23 @@ export default function ContactPage() {
 
         <div>
           <div style={label}>phone</div>
-          <a href="tel:+1xxxxxxxxxx" style={value}>
+          <a href="tel:+12169260479" style={value}>
             (216) 926-0479
           </a>
         </div>
 
         <div>
           <div style={label}>github</div>
-          <a href="https://github.com/built-by-ann" target="_blank" rel="noreferrer" style={value}>
+          <ExternalLink href="https://github.com/built-by-ann" style={value}>
             github.com/built-by-ann
-          </a>
+          </ExternalLink>
         </div>
 
         <div>
           <div style={label}>linkedin</div>
-          <a href="https://www.linkedin.com/in/ann-mathew154" target="_blank" rel="noreferrer" style={value}>
+          <ExternalLink href="https://www.linkedin.com/in/ann-mathew154" style={value}>
             linkedin.com/in/ann-mathew154
-          </a>
+          </ExternalLink>
         </div>
 
       </div>

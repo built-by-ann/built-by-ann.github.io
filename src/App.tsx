@@ -80,7 +80,7 @@ function ScrollToTop() {
 export default function App() {
   return (
     <BrowserRouter>
-      <div style={{ width: 1440, backgroundColor: '#490013' }}>
+      <div style={{ backgroundColor: '#490013' }}>
         <SkipLink />
         <ScrollToTop />
         <RouteAnnouncer />

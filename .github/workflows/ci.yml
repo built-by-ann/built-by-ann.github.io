@@ -27,9 +27,9 @@ jobs:
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium
 
-      # Fails the job if axe finds a violation on any route.
-      - name: Accessibility tests (axe)
-        run: npm run test:a11y
+      # Fails the job if axe finds a violation on any route, or a link check fails.
+      - name: Tests (axe accessibility and link checks)
+        run: npm test
 
       - name: Upload Playwright report
         if: failure()

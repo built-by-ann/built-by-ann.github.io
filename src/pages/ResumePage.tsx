@@ -1,3 +1,5 @@
+import { fluid } from '../fluid'
+
 const resumePdf = '/files/AnnMathew_Resume.pdf'
 
 export default function ResumePage() {
@@ -7,15 +9,15 @@ export default function ResumePage() {
         backgroundColor: '#490013',
         paddingTop: 80,
         paddingBottom: 80,
-        paddingLeft: 188,
-        paddingRight: 188,
+        paddingLeft: 'var(--gutter)',
+        paddingRight: 'var(--gutter)',
       }}
     >
       <h1
         style={{
           fontFamily: "'Outfit', sans-serif",
           fontWeight: 700,
-          fontSize: 68,
+          fontSize: fluid(68),
           color: '#ed8466',
           lineHeight: 1,
           margin: 0,
@@ -25,7 +27,7 @@ export default function ResumePage() {
         my resume!
       </h1>
 
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 48 }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, alignItems: 'center', justifyContent: 'space-between', marginBottom: 48 }}>
         <p
           style={{
             fontFamily: "'Roboto', sans-serif",

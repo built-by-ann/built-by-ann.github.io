@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react'
 import { inkMuted, creamMuted } from '../colors'
+import { fluid } from '../fluid'
 
 function ImagePlaceholder({ style }: { style?: CSSProperties }) {
   return (
@@ -66,19 +67,20 @@ export default function AboutPage() {
       <div
         id="about"
         style={{
-          padding: '100px 188px 80px',
+          padding: '100px var(--gutter) 80px',
           display: 'flex',
-          gap: 80,
+          flexWrap: 'wrap',
+          gap: 'clamp(32px, 6vw, 80px)',
           alignItems: 'center',
         }}
       >
-        <div style={{ flex: 3 }}>
+        <div style={{ flex: '3 1 340px' }}>
           <div style={label}>about me</div>
           <h1
             style={{
               fontFamily: "'Outfit', sans-serif",
               fontWeight: 700,
-              fontSize: 88,
+              fontSize: fluid(88),
               color: ink,
               lineHeight: 1,
               margin: 0,
@@ -120,7 +122,7 @@ export default function AboutPage() {
           </p>
         </div>
 
-        <div style={{ flex: 2 }}>
+        <div style={{ flex: '2 1 260px' }}>
           <img
             src="/files/GradImage.png"
             alt="Ann Mathew smiling in a navy Vanderbilt graduation gown with a gold and black honor cord"
@@ -130,7 +132,7 @@ export default function AboutPage() {
       </div>
 
       {/* ─── WHAT DRIVES ME ─── */}
-      <div style={{ backgroundColor: '#490013', padding: '80px 188px' }}>
+      <div style={{ backgroundColor: '#490013', padding: 'var(--section-y-sm) var(--gutter)' }}>
         <div
           style={{
             fontFamily: "'Roboto', sans-serif",
@@ -148,7 +150,7 @@ export default function AboutPage() {
           style={{
             fontFamily: "'Outfit', sans-serif",
             fontWeight: 700,
-            fontSize: 56,
+            fontSize: fluid(56),
             color: '#f5d7cc',
             lineHeight: 1,
             margin: 0,
@@ -161,7 +163,7 @@ export default function AboutPage() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr 1fr',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
             gap: 24,
           }}
         >
@@ -204,13 +206,13 @@ export default function AboutPage() {
       </div>
 
       {/* ─── CURRENTLY ─── */}
-      <div style={{ padding: '80px 188px' }}>
+      <div style={{ padding: 'var(--section-y-sm) var(--gutter)' }}>
         <div style={label}>right now</div>
         <h2
           style={{
             fontFamily: "'Outfit', sans-serif",
             fontWeight: 700,
-            fontSize: 56,
+            fontSize: fluid(56),
             color: ink,
             lineHeight: 1,
             margin: 0,
@@ -232,7 +234,8 @@ export default function AboutPage() {
               key={key}
               style={{
                 display: 'flex',
-                gap: 40,
+                flexWrap: 'wrap',
+                gap: '8px 40px',
                 alignItems: 'baseline',
                 borderBottom: '1.5px solid rgba(73,0,19,0.15)',
                 padding: '24px 0',
@@ -269,7 +272,7 @@ export default function AboutPage() {
       </div>
 
       {/* ─── BEYOND THE CODE ─── */}
-      <div style={{ backgroundColor: '#2e4d62', padding: '96px 188px' }}>
+      <div style={{ backgroundColor: '#2e4d62', padding: 'var(--section-y) var(--gutter)' }}>
         <div
           style={{
             fontFamily: "'Roboto', sans-serif",
@@ -287,7 +290,7 @@ export default function AboutPage() {
           style={{
             fontFamily: "'Outfit', sans-serif",
             fontWeight: 700,
-            fontSize: 56,
+            fontSize: fluid(56),
             color: '#f5d7cc',
             lineHeight: 1,
             margin: 0,
@@ -297,7 +300,7 @@ export default function AboutPage() {
           beyond the code
         </h2>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 32 }}>
           {[
             {
               role: 'student centers',

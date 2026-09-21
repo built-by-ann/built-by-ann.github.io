@@ -20,8 +20,10 @@ export default function Footer() {
         alignItems: 'center',
         justifyContent: 'space-between',
         backgroundColor: roseMid,
-        height: 95,
-        padding: '0 189px',
+        minHeight: 95,
+        padding: '16px var(--gutter)',
+        flexWrap: 'wrap',
+        gap: '12px 32px',
         width: '100%',
       }}
     >

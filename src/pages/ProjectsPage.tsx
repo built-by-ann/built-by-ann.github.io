@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import type { CSSProperties } from 'react'
 import { linkName } from '../LinkLabel'
+import ExternalLink from '../ExternalLink'
+import { fluid } from '../fluid'
 
 interface Project {
   num: string
@@ -207,7 +209,7 @@ function ProjectCard({ project, isLast, expanded, onToggle }: { project: Project
     fontWeight: 500,
     fontSize: 15,
     padding: '6px 18px',
-    whiteSpace: 'nowrap',
+    maxWidth: '100%',
   }
 
   const titleId = `project-${project.num}-title`
@@ -216,7 +218,7 @@ function ProjectCard({ project, isLast, expanded, onToggle }: { project: Project
     <article
       aria-labelledby={titleId}
       style={{
-        padding: '40px 44px',
+        padding: 'clamp(24px, 4vw, 40px) clamp(20px, 4vw, 44px)',
         marginBottom: isLast ? 0 : 24,
         border: `1.5px solid ${ink}`,
         backgroundColor: project.accent,
@@ -258,7 +260,7 @@ function ProjectCard({ project, isLast, expanded, onToggle }: { project: Project
               fontFamily: "'Outfit', sans-serif",
               fontStyle: 'normal',
               fontWeight: 700,
-              fontSize: 56,
+              fontSize: fluid(56),
               color: ink,
               lineHeight: 1,
               margin: 0,
@@ -319,11 +321,9 @@ function ProjectCard({ project, isLast, expanded, onToggle }: { project: Project
             ))}
           </div>
 
-          <a
+          <ExternalLink
             href={project.github}
             aria-label={linkName(project.label ?? 'view on github →', project.title)}
-            target="_blank"
-            rel="noreferrer"
             style={{
               display: 'inline-block',
               marginTop: 28,
@@ -334,11 +334,10 @@ function ProjectCard({ project, isLast, expanded, onToggle }: { project: Project
               fontSize: 18,
               padding: '14px 32px',
               textDecoration: 'none',
-              whiteSpace: 'nowrap',
             }}
           >
             {project.label ?? 'view on github →'}
-          </a>
+          </ExternalLink>
         </>
       )}
     </article>
@@ -354,15 +353,15 @@ export default function ProjectsPage() {
         backgroundColor: '#490013',
         paddingTop: 80,
         paddingBottom: 100,
-        paddingLeft: 188,
-        paddingRight: 188,
+        paddingLeft: 'var(--gutter)',
+        paddingRight: 'var(--gutter)',
       }}
     >
       <h1
         style={{
           fontFamily: "'Outfit', sans-serif",
           fontWeight: 700,
-          fontSize: 68,
+          fontSize: fluid(68),
           color: '#f5d7cc',
           lineHeight: 1,
           margin: 0,
